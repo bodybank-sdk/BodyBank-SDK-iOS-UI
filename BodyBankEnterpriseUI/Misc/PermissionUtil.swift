@@ -1,9 +1,9 @@
 //
 //  PermissionUtil.swift
-//  BeforeAfterPro4
+//  Bodybank
 //
 //  Created by skonb on 2017/05/12.
-//  Copyright © 2017年 baophan. All rights reserved.
+//  Copyright © 2017年 Original Inc.. All rights reserved.
 //
 
 import Foundation

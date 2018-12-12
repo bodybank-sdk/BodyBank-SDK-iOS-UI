@@ -7,11 +7,11 @@
 //
 
 import UIKit
-import SVProgressHUD
 import BodyBankEnterprise
+import Alertift
 
 public protocol EstimationHistoryListViewControllerDelegate: class{
-    func estimationHistoryListViewController(viewController: EstimationHistoryListViewController, didSelectEstimationRequest estimationRequest: EstimationRequest)
+    func estimationHistoryListViewController(viewController: EstimationHistoryListViewController, didSelectEstimationRequest estimationRequest: EstimationRequest, toShowDetailViewController detailViewController: EstimationHistoryViewController)
     
     func estimationHistoryListViewControllerDidFinish(viewController: EstimationHistoryListViewController)
 }
@@ -67,18 +67,16 @@ open class EstimationHistoryListViewController: UITableViewController {
             return
         }
         loading = true
-        SVProgressHUD.show()
         if let _ = BodyBankEnterprise.defaultTokenProvider(){
                 let token = self.shouldRefresh ? nil : self.nextToken
                 let limit = 20
                 BodyBankEnterprise.listEstimationRequests(limit: limit, nextToken: token, callback: {[unowned self] (requests, nextToken, errors) in
                     if let errors = errors{
                         self.loading = false
-                        SVProgressHUD.showError(withStatus: errors.map({ (error) -> String in
+                        Alertift.alert(title: nil, message: errors.map({ (error) -> String in
                             error.localizedDescription
-                        }).joined(separator: "\n"))
+                            }).joined(separator: "\n")).action(.default("OK")).show(on: self, completion: nil)
                     }else{
-                        SVProgressHUD.dismiss()
                         self.nextToken = nextToken
                         self.loadingFinished = requests?.count == 0
                         DispatchQueue.main.async {
@@ -135,16 +133,16 @@ open class EstimationHistoryListViewController: UITableViewController {
             if let cell = sender as? EstimationHistoryListCell{
                 if let request = cell.request{
                     id = request.id!
-                    self.delegate?.estimationHistoryListViewController(viewController: self, didSelectEstimationRequest: request)
+                    self.delegate?.estimationHistoryListViewController(viewController: self, didSelectEstimationRequest: request, toShowDetailViewController: segue.destination as! EstimationHistoryViewController)
                 }
             }
             if !id.isEmpty{
                 if let vc = segue.destination as? EstimationHistoryViewController{
-                    BodyBankEnterprise.getEstimationRequest(id: id, callback: { (detailedRequest, errors) in
+                    BodyBankEnterprise.getEstimationRequest(id: id, callback: {[unowned self] (detailedRequest, errors) in
                         if let errors = errors{
-                            SVProgressHUD.showError(withStatus: errors.map({ (error) -> String in
+                            Alertift.alert(title: nil, message: errors.map({ (error) -> String in
                                 error.localizedDescription
-                            }).joined(separator: "\n"))
+                            }).joined(separator: "\n")).action(.default("OK")).show(on: self, completion: nil)
                         }else{
                             vc.request = detailedRequest
                         }

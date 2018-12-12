@@ -7,13 +7,19 @@
 //
 
 import BodyBankEnterprise
+import UIKit
 
-public extension BodyBankEnterprise.UI{
-    public class Camera{
+public extension BodyBankEnterprise{
+    public class CameraUI{
         static var bundle: Bundle?{
             get{
                 let podBundle = Bundle(for: self)
-                return podBundle
+                if let path = podBundle.path(forResource: "BodyBankEnterpriseUI-Camera", ofType: "bundle"){
+                    let bundle = Bundle(path: path)
+                    return bundle
+                }else{
+                    return nil
+                }
             }
         }
         public static func show(on viewController: UIViewController, animated: Bool, completion: (() -> Void)?) -> CameraViewController?{

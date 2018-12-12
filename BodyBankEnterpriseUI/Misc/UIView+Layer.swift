@@ -3,7 +3,7 @@
 //  RepellentFingerMeasurer
 //
 //  Created by Shunpei Kobayashi on 2018/05/10.
-//  Copyright © 2018年 Naradewa Inc. All rights reserved.
+//  Copyright © 2018年 Original Inc. All rights reserved.
 //
 
 import UIKit
