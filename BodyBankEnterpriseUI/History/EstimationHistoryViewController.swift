@@ -7,13 +7,14 @@
 //
 
 import UIKit
-import SimpleImageViewer
+import SimpleImageViewerNew
 import BodyBankEnterprise
 import AFDateHelper
 import SCPageViewController
 
 public protocol EstimationHistoryViewControllerDelegate: class{
     func estimationzHistoryViewControllerDidFinish(viewController: EstimationHistoryViewController)
+    func estimationzHistoryViewControllerDidCancel(viewController: EstimationHistoryViewController)
 }
 
 public struct ResultEntry {
@@ -25,6 +26,7 @@ public struct ResultEntry {
 open class EstimationHistoryViewController: UITableViewController {
     @IBOutlet weak var pageControl: UIPageControl!
     var pageViewController :SCPageViewController!
+    @IBOutlet var doneButton: UIBarButtonItem!
     open weak var delegate: EstimationHistoryViewControllerDelegate?
     var navigationBarBackgroundImage: UIImage?
     open var lengthUnit = "cm"
@@ -32,6 +34,20 @@ open class EstimationHistoryViewController: UITableViewController {
     open var request: EstimationRequest!{
         didSet{
             updateAppearances()
+        }
+    }
+    
+    open var isDoneButtonShown = false{
+        didSet{
+            updateDoneButtonAppearance()
+        }
+    }
+    
+    func updateDoneButtonAppearance(){
+        if isDoneButtonShown{
+            navigationItem.rightBarButtonItem = doneButton
+        }else{
+            navigationItem.rightBarButtonItem = nil
         }
     }
     
@@ -76,6 +92,11 @@ open class EstimationHistoryViewController: UITableViewController {
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 100
         tableView.reloadData()
+        if let index = navigationController?.viewControllers.index(of: self), index > 0{
+            //pushed from list
+            navigationItem.leftBarButtonItem = nil
+        }
+        updateDoneButtonAppearance()
     }
     
     open override func viewDidLayoutSubviews() {
@@ -134,9 +155,14 @@ open class EstimationHistoryViewController: UITableViewController {
     
 
     
-    @IBAction func closeButtonDidTap(sender: Any){
+    @IBAction func doneButtonDidTap(sender: Any){
        delegate?.estimationzHistoryViewControllerDidFinish(viewController: self)
     }
+    
+    @IBAction func cancelButtonDidTap(sender: Any){
+        delegate?.estimationzHistoryViewControllerDidCancel(viewController: self)
+    }
+    
     
     open override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "embed_pager"{

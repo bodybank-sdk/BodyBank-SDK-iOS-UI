@@ -8,10 +8,9 @@
 
 import UIKit
 import NVActivityIndicatorView
-import SVProgressHUD
 import BodyBankEnterprise
 import Kingfisher
-import SimpleImageViewer
+import SimpleImageViewerNew
 
 public protocol EstimationHistoryImageCellDelegate: class {
     func estimationHistoryImageCell(cell: EstimationHistoryImagesCell, requiresShowingFullImageUsing imageView: UIImageView, isFrontImage: Bool)

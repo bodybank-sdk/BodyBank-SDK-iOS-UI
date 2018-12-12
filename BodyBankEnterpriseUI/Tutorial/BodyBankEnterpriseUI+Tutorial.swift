@@ -7,13 +7,19 @@
 //
 
 import BodyBankEnterprise
+import UIKit
 
-public extension BodyBankEnterprise.UI{
-    public class Tutorial{
+public extension BodyBankEnterprise{
+    public class TutorialUI{
         static var bundle: Bundle?{
             get{
                 let podBundle = Bundle(for: self)
-                return podBundle
+                if let path = podBundle.path(forResource: "BodyBankEnterpriseUI-Tutorial", ofType: "bundle"){
+                    let bundle = Bundle(path: path)
+                    return bundle
+                }else{
+                    return nil
+                }
             }
         }
         public static func show(on viewController: UIViewController, animated: Bool, completion: (() -> Void)?) -> TutorialViewController?{

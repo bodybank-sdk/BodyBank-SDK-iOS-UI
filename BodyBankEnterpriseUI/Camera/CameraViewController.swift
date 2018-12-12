@@ -7,8 +7,6 @@
 //
 
 import UIKit
-
-import UIKit
 import AVFoundation
 import AssetsLibrary
 import MobileCoreServices
@@ -18,9 +16,8 @@ import CoreImage
 import Photos
 import SwiftSpinner
 import Alertift
-import SVProgressHUD
 import BodyBankEnterprise
-import SimpleImageViewer
+import SimpleImageViewerNew
 
 public protocol CameraViewControllerDelegate: class{
     func cameraViewControllerDidCancel(viewController: CameraViewController)
@@ -53,15 +50,12 @@ open class CameraViewController: UIViewController {
     var imageCaptured: UIImage?
 
     var showingLoading = false
-    var isLockingTouch: Bool = false
-    var isCurrentUsingBackCamera: Bool = false
-    var currentFlashState: Int = 0
-    var isCapture: Bool = false
+    var lockingTouch: Bool = false
+    var cameraFacingBack: Bool = false
+    var capturing: Bool = false
     @IBOutlet weak var guideImageView: UIImageView!
-    var estimationParameter: EstimationParameter = EstimationParameter()
+    open var estimationParameter: EstimationParameter = EstimationParameter()
     @IBOutlet weak var grayoutView: UIView!
-    @IBOutlet weak var closeButton: UIButton!
-    @IBOutlet weak var meButton: UIButton!
     @IBOutlet weak var captureButton: UIButton!
     @IBOutlet weak var frontImageButton: UIButton!
     @IBOutlet weak var heightValueLabel: UILabel!
@@ -81,16 +75,16 @@ open class CameraViewController: UIViewController {
     var capturingFront = true {
         didSet {
             if capturingFront {
-                guideImageView.image = UIImage(named: "front")
-                closeButton.isHidden = true
-                meButton.isHidden = false
+                if let bundle = BodyBankEnterprise.CameraUI.bundle{
+                 guideImageView.image = UIImage(named: "front", in: bundle, compatibleWith: nil)
+                }
                 frontImageButton.isHidden = true
                 estimationParameter.frontImage = nil
                 frontImageButton.setImage(nil, for: .normal)
             } else {
-                guideImageView.image = UIImage(named: "side")
-                closeButton.isHidden = false
-                meButton.isHidden = true
+                if let bundle = BodyBankEnterprise.CameraUI.bundle{
+                    guideImageView.image = UIImage(named: "side", in: bundle, compatibleWith: nil)
+                }
                 frontImageButton.isHidden = false
                 estimationParameter.sideImage = nil
                 frontImageButton.setImage(estimationParameter.frontImage, for: .normal)
@@ -122,7 +116,7 @@ open class CameraViewController: UIViewController {
         if (!captureSession.isRunning) {
             captureSession.startRunning()
         }
-        isLockingTouch = false
+        lockingTouch = false
         if (cameraLayer.alpha == 0) {
             UIView.animate(withDuration: 0.5, animations: { () -> Void in
                 self.cameraLayer.alpha = 1;
@@ -171,7 +165,7 @@ open class CameraViewController: UIViewController {
         if (captureSession.isRunning) {
             captureSession.stopRunning()
         }
-        isLockingTouch = true
+        lockingTouch = true
         stopListeningGyro()
         BodyBankEnterprise.unsubscribeEstimationRequests()
     }
@@ -220,33 +214,23 @@ open class CameraViewController: UIViewController {
     
     // MARK: Initial Methods
     func initializeCapture() {
-        self.previewLayer?.removeFromSuperlayer()
-        self.stillImageOutputImpl = nil
-        self.captureSession = AVCaptureSession()
-        var isBack = true
-        if let position = captureDevice?.position {
-            isBack = position != .front
-        }
-        self.initialCameraSession(isBack)
+        previewLayer?.removeFromSuperlayer()
+        stillImageOutputImpl = nil
+        captureSession = AVCaptureSession()
+        initializeCameraSession(captureDevice?.position != .front)
     }
 
 
-    func initialCameraSession(_ isBackCamera: Bool) {
-        isCurrentUsingBackCamera = isBackCamera
-        canFocus = isBackCamera
-        if (!canFocus) {
-            currentFlashState = 0
-        } else {
-            currentFlashState = 0
-        }
-
+    func initializeCameraSession(_ facingBack: Bool) {
+        cameraFacingBack = facingBack
+        canFocus = facingBack
         // captureSession
         captureSession = AVCaptureSession()
         captureSession.sessionPreset = .photo
         let devices = AVCaptureDevice.devices()
         for device in devices {
             if ((device as AnyObject).hasMediaType(.video)) {
-                if isBackCamera {
+                if facingBack {
                     if ((device as AnyObject).position == AVCaptureDevice.Position.back) {
                         captureDevice = device as? AVCaptureDevice
                         if captureDevice != nil {
@@ -264,27 +248,19 @@ open class CameraViewController: UIViewController {
             }
 
         }
-
-        if (captureDevice?.isTorchAvailable == true) {
-
-        } else {
-            currentFlashState = 0
-        }
-
-
     }
 
     func setupCamera() {
-        if isCurrentUsingBackCamera {
-            self.setFocusMode(AVCaptureDevice.FocusMode.continuousAutoFocus)
-            self.setExposureMode(.continuousAutoExposure)
+        if cameraFacingBack {
+            setFocusMode(AVCaptureDevice.FocusMode.continuousAutoFocus)
+            setExposureMode(.continuousAutoExposure)
         }
 
         do {
             let captureDeviceInput = try AVCaptureDeviceInput(device: captureDevice!)
             captureSession.addInput(captureDeviceInput)
         } catch let error as NSError {
-//            print(ErrorHandler.descriptionFor(error: error))
+            print(error.localizedDescription)
         }
 
         if #available(iOS 10.0, *) {
@@ -328,12 +304,12 @@ open class CameraViewController: UIViewController {
 
     open override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
 
-        if (canFocus == true && isLockingTouch == false) {
+        if (canFocus && !lockingTouch) {
             if let anyTouch: AnyObject = touches.first {
                 let location = anyTouch.location(in: self.view)
-                self.canFocus = false
+                canFocus = false
                 let pointOfInterest = CGPoint(x: location.y / view.bounds.height, y: 1.0 - (location.x / view.bounds.width))
-                self.focusAtPoint(pointOfInterest)
+                focusAtPoint(pointOfInterest)
             }
 
         }
@@ -422,15 +398,6 @@ open class CameraViewController: UIViewController {
                 // handle error
                 return
             }
-
-
-            if (self.currentFlashState == 1) {
-                self.captureDevice?.torchMode = .on
-                sleep(1)
-            } else if (self.currentFlashState == 2) {
-                self.captureDevice?.torchMode = .auto
-                sleep(1)
-            }
             if #available(iOS 10.0, *){
                 let settingsForMonitoring = AVCapturePhotoSettings()
                 settingsForMonitoring.flashMode = .auto
@@ -455,26 +422,7 @@ open class CameraViewController: UIViewController {
         })
     }
 
-    func changeFlashStateTo(_ isOn: Bool) {
-        if (self.captureDevice?.isTorchAvailable == true) {
-            //            self.captureDevice?.lockForConfiguration(nil)
-            do {
-                try self.captureDevice?.lockForConfiguration()
-            } catch {
-                // handle error
-                return
-            }
-
-            if (isOn == true) {
-                self.captureDevice?.torchMode = .on
-            } else {
-                self.captureDevice?.torchMode = .off
-            }
-            self.captureDevice?.unlockForConfiguration()
-        }
-    }
-
-    @IBAction func actionCapture(_ sender: UIButton) {
+    @IBAction func captureButtonDidTap(_ sender: UIButton) {
         if (!PermissionUtil.isCameraEnabled()) {
             PermissionUtil.checkCameraPermission(self, callback: { (dialogShown) in
                 
@@ -494,7 +442,7 @@ open class CameraViewController: UIViewController {
     }
     
     func focusOnCenterThen(successCallback: (() -> Void)?, errorCallback:(() -> Void)?){
-        if (canFocus == true && isLockingTouch == false) {
+        if (canFocus && !lockingTouch) {
             let location = cameraLayer.bounds.center
             self.canFocus = false
             let pointOfInterest = CGPoint(x: location.y / view.bounds.height, y: 1.0 - (location.x / view.bounds.width))
@@ -508,18 +456,18 @@ open class CameraViewController: UIViewController {
     }
 
     func captureImpl() {
-        if self.isCapture {
+        if capturing {
             return
         }
 
-        self.isCapture = true
+        capturing = true
         focusOnCenterThen(successCallback: {[unowned self] in
             self.captureImage { [unowned self](image, error) -> Void in
                 if (error == nil && image != nil) {
                     guard let _ = image else {
                         return
                     }
-                    self.isCapture = false
+                    self.capturing = false
                     if let orientation = self.previewLayer?.connection?.videoOrientation {
                         if let normalizedImage = image?.normalized(videoOrientation: orientation) {
                             var transformedImage: UIImage? = normalizedImage
@@ -544,8 +492,8 @@ open class CameraViewController: UIViewController {
                     }
                 }
             }
-        }) {
-            self.isCapture = false
+        }) {[unowned self] in
+            self.capturing = false
             Alertift.alert(title: NSLocalizedString("", comment: ""), message: NSLocalizedString("Failed to focus", comment: "")).action(.cancel(NSLocalizedString("OK", comment: ""))).show()
 
         }
@@ -571,19 +519,6 @@ open class CameraViewController: UIViewController {
         // Third step: Apply transformation
         let outputImage = perspectiveCorrection.outputImage
         return image
-    }
-
-    @IBAction func actionChangeFlashState(_ sender: AnyObject) {
-        if (!PermissionUtil.isCameraEnabled()) {
-            PermissionUtil.checkCameraPermission(self, callback: nil)
-        } else {
-            if (currentFlashState < 2) {
-                currentFlashState += 1
-            } else {
-                currentFlashState = 0
-            }
-        }
-
     }
 
     open override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -639,26 +574,20 @@ open class CameraViewController: UIViewController {
         }
     }
 
-    @IBAction func actionSwitchCamera(_ sender: UIButton) {
+    @IBAction func switchCameraButtonDidTap(_ sender: UIButton) {
         if (!PermissionUtil.isCameraEnabled()) {
             PermissionUtil.checkCameraPermission(self, callback: nil)
         } else {
             sender.isEnabled = false
-            var isBackCam: Bool = false
-            if (captureDevice!.position == AVCaptureDevice.Position.front) {
-                isBackCam = true
-            } else {
-                isBackCam = false
-            }
             UIView.animate(
                     withDuration: 0.2,
                     animations: { () -> Void in
                         self.cameraLayer.alpha = 0.1
-                    }, completion: { (finished: Bool) -> Void in
+                    }, completion: {[unowned self] (finished: Bool) -> Void in
                 self.previewLayer?.removeFromSuperlayer()
                 self.stillImageOutputImpl = nil
                 self.captureSession = AVCaptureSession()
-                self.initialCameraSession(isBackCam)
+                self.initializeCameraSession(self.captureDevice?.position != .front)
                 UIView.animate(
                         withDuration: 0.2,
                         animations: { () -> Void in
@@ -886,7 +815,7 @@ extension CameraViewController {
             angleView.center = CGPoint(x: angleView.center.x, y: angleView.center.y + CGFloat(translationY - previousTranslationY))
             previousTranslationY = translationY
             if abs(diff) < 3.0 / 180.0 * Double.pi {
-                angleView.backgroundColor = UIColor.Bodygram.main
+                angleView.backgroundColor = UIColor.BodyBank.Gradient.begin
                 capturable = true
             } else {
                 angleView.backgroundColor = .white
@@ -908,7 +837,7 @@ extension CameraViewController {
             tiltView.transform = CGAffineTransform(rotationAngle: angle)
             if abs(angle) < CGFloat(3.0 / 180.0 * Double.pi) {
                 capturable = capturable && true
-                tiltView.backgroundColor = UIColor.Bodygram.main
+                tiltView.backgroundColor = UIColor.BodyBank.Gradient.begin
             } else {
                 capturable = false
                 tiltView.backgroundColor = .white

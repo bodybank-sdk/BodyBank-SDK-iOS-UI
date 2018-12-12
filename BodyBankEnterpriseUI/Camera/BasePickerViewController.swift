@@ -12,6 +12,7 @@ class BasePickerViewController: UIViewController {
     @IBOutlet weak var saveButtonBackground: UIView!
     @IBOutlet weak var inputField: UITextField!
     @IBOutlet weak var unitLabel: UILabel!
+    @IBOutlet weak var saveButton: UIButton!
     var gradientLayer: CALayer?
     open var unit: String!
     
@@ -36,6 +37,9 @@ class BasePickerViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         inputField.text = initialValueString
+        if initialValueString == "-"{
+           saveButton.isEnabled = false
+        }
         unitLabel.text = unit
         let rec = UITapGestureRecognizer(target: self, action: #selector(self.backgroundDidTap(sender:)))
         view.addGestureRecognizer(rec)
@@ -102,6 +106,7 @@ class BasePickerViewController: UIViewController {
     func inflateDefaultValue(){
         if inputField.text == "-"{
             inputField.text = correctedValueString(forValue: currentValue)
+            saveButton.isEnabled = true
         }
     }
     

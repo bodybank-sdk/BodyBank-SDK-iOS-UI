@@ -7,13 +7,19 @@
 //
 
 import BodyBankEnterprise
+import UIKit
 
-public extension BodyBankEnterprise.UI{
-    public class History{
+public extension BodyBankEnterprise{
+    public class HistoryUI{
         static var bundle: Bundle?{
             get{
                 let podBundle = Bundle(for: self)
-                return podBundle
+                if let path = podBundle.path(forResource: "BodyBankEnterpriseUI-History", ofType: "bundle"){
+                    let bundle = Bundle(path: path)
+                    return bundle
+                }else{
+                    return nil
+                }
             }
         }
         public static func showList(on viewController: UIViewController, animated: Bool, completion: (() -> Void)?) -> EstimationHistoryListViewController?{
