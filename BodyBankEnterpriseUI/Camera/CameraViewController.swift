@@ -579,6 +579,7 @@ open class CameraViewController: UIViewController {
             PermissionUtil.checkCameraPermission(self, callback: nil)
         } else {
             sender.isEnabled = false
+            var nextFacingBack = captureDevice?.position == .front
             UIView.animate(
                     withDuration: 0.2,
                     animations: { () -> Void in
@@ -587,7 +588,7 @@ open class CameraViewController: UIViewController {
                 self.previewLayer?.removeFromSuperlayer()
                 self.stillImageOutputImpl = nil
                 self.captureSession = AVCaptureSession()
-                self.initializeCameraSession(self.captureDevice?.position != .front)
+                self.initializeCameraSession(nextFacingBack)
                 UIView.animate(
                         withDuration: 0.2,
                         animations: { () -> Void in
