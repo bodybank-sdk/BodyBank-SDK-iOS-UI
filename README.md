@@ -90,13 +90,13 @@ extension ViewController: EstimationHistoryListViewControllerDelegate{
 }
 
 extension ViewController: EstimationHistoryViewControllerDelegate{
-func estimationzHistoryViewControllerDidFinish(viewController: EstimationHistoryViewController) {
-dismiss(animated: true, completion: nil)
-}
+    func estimationzHistoryViewControllerDidFinish(viewController: EstimationHistoryViewController) {
+        dismiss(animated: true, completion: nil)
+    }
 
-func estimationzHistoryViewControllerDidCancel(viewController: EstimationHistoryViewController) {
+    func estimationzHistoryViewControllerDidCancel(viewController: EstimationHistoryViewController) {
 
-}
+    }
 }
 
 
