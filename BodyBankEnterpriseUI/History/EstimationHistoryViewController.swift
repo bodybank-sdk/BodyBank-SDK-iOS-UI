@@ -64,7 +64,7 @@ open class EstimationHistoryViewController: UITableViewController {
                 entries.append(ResultEntry(name: "Sleeve", value: result.sleeveLength ?? 0, unit: lengthUnit))
                 entries.append(ResultEntry(name: "Bicep", value: result.bicepCircumference ?? 0, unit: lengthUnit))
                 entries.append(ResultEntry(name: "Wrist", value: result.wristCircumference ?? 0, unit: lengthUnit))
-                entries.append(ResultEntry(name: "Chest", value: result.chestCircumFerence ?? 0, unit: lengthUnit))
+                entries.append(ResultEntry(name: "Chest", value: result.chestCircumference ?? 0, unit: lengthUnit))
                 entries.append(ResultEntry(name: "Waist", value: result.waistCircumference ?? 0, unit: lengthUnit))
                 entries.append(ResultEntry(name: "High Hip", value: result.thighCircumference ?? 0, unit: lengthUnit))
                 entries.append(ResultEntry(name: "Hip", value: result.hipCircumference ?? 0, unit: lengthUnit))
