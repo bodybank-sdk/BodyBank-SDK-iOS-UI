@@ -7,6 +7,7 @@ Pod::Spec.new do |s|
 
     s.homepage = 'https://originalstitch.com'
     s.platform = :ios, '9.0'
+    s.swift_version = '4.2'
     s.source = {
         :git => "https://github.com/bodybank-sdk/BodyBank-SDK-iOS-UI.git",
         :tag => s.version.to_s
