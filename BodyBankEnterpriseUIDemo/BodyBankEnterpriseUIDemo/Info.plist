@@ -41,5 +41,11 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>NSMotionUsageDescription</key>
+	<string>測定精度を上げるため、モーションセンサーにアクセスします</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>写真を保存したり、取り込むためにフォトライブラリにアクセスします。</string>
+	<key>NSCameraUsageDescription</key>
+	<string>写真を撮影するために、カメラにアクセスします。</string>
 </dict>
 </plist>

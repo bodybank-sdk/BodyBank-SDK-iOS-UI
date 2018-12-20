@@ -18,7 +18,7 @@ public extension BodyBankEnterprise{
                     let bundle = Bundle(path: path)
                     return bundle
                 }else{
-                    return nil
+                    return podBundle
                 }
             }
         }

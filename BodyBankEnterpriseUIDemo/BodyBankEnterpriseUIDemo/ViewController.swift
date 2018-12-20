@@ -17,6 +17,10 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view, typically from a nib.
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        showCamera()
+    }
     
     func showTutorial(){
         let tutorial = BodyBankEnterprise.TutorialUI.show(on: self, animated: true, completion: nil)
