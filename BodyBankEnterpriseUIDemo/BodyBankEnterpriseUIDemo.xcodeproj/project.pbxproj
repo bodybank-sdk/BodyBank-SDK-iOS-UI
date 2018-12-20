@@ -7,56 +7,82 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2FC366CB33DA99FF6C281DF2 /* Pods_BodyBankEnterpriseUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A0240D91454823AC4856F1D /* Pods_BodyBankEnterpriseUI.framework */; };
 		5950A27FAD8F2EF0746E1888 /* Pods_BodyBankEnterpriseUIDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A4157A5218D429C756B3D29 /* Pods_BodyBankEnterpriseUIDemo.framework */; };
 		68DBD14C640B826866C9BB5E /* Pods_BodyBankEnterpriseUIDemoUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E61948E930D496589DBA3F1B /* Pods_BodyBankEnterpriseUIDemoUITests.framework */; };
-		8E593A2A21C1975E00505DC0 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 8E593A2921C1975E00505DC0 /* README.md */; };
-		8EC6789A21C1300600514FF9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC6789921C1300600514FF9 /* AppDelegate.swift */; };
-		8EC6789C21C1300600514FF9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC6789B21C1300600514FF9 /* ViewController.swift */; };
-		8EC6789F21C1300600514FF9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8EC6789D21C1300600514FF9 /* Main.storyboard */; };
-		8EC678A121C1300700514FF9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8EC678A021C1300700514FF9 /* Assets.xcassets */; };
-		8EC678A421C1300700514FF9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8EC678A221C1300700514FF9 /* LaunchScreen.storyboard */; };
+		8E41ED8C21CB9ED9004F9931 /* BodyBankEnterpriseUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E41ED8321CB9ED9004F9931 /* BodyBankEnterpriseUI.framework */; };
+		8E41ED9321CB9ED9004F9931 /* BodyBankEnterpriseUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E41ED9221CB9ED9004F9931 /* BodyBankEnterpriseUITests.swift */; };
+		8E41ED9821CB9ED9004F9931 /* BodyBankEnterpriseUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E41ED8321CB9ED9004F9931 /* BodyBankEnterpriseUI.framework */; };
+		8E41ED9921CB9ED9004F9931 /* BodyBankEnterpriseUI.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8E41ED8321CB9ED9004F9931 /* BodyBankEnterpriseUI.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		8E41EDA121CB9EE7004F9931 /* BodyBankEnterpriseUI.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 8EC6791721C1348000514FF9 /* BodyBankEnterpriseUI.podspec */; };
+		8E41EDA221CBA045004F9931 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC6789921C1300600514FF9 /* AppDelegate.swift */; };
+		8E41EDA321CBA045004F9931 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC6789B21C1300600514FF9 /* ViewController.swift */; };
+		8E41EDA421CBA050004F9931 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8EC6789D21C1300600514FF9 /* Main.storyboard */; };
+		8E41EDA521CBA050004F9931 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8EC678A021C1300700514FF9 /* Assets.xcassets */; };
+		8E41EDA621CBA050004F9931 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8EC678A221C1300700514FF9 /* LaunchScreen.storyboard */; };
+		8E41EDA721CBA141004F9931 /* ImagePageItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC678E721C1302700514FF9 /* ImagePageItemViewController.swift */; };
+		8E41EDA821CBA141004F9931 /* EstimationHistoryListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC678E821C1302700514FF9 /* EstimationHistoryListCell.swift */; };
+		8E41EDA921CBA141004F9931 /* EstimationHistoryImagesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC678E921C1302700514FF9 /* EstimationHistoryImagesCell.swift */; };
+		8E41EDAA21CBA141004F9931 /* EstimationHistoryResultEntryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC678EA21C1302700514FF9 /* EstimationHistoryResultEntryCell.swift */; };
+		8E41EDAB21CBA141004F9931 /* HistoryDetailImagePageLayouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC678EC21C1302700514FF9 /* HistoryDetailImagePageLayouter.swift */; };
+		8E41EDAC21CBA141004F9931 /* EstimationHistoryListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC678ED21C1302700514FF9 /* EstimationHistoryListViewController.swift */; };
+		8E41EDAD21CBA141004F9931 /* BodyBankEnterpriseUI+History.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC678EE21C1302700514FF9 /* BodyBankEnterpriseUI+History.swift */; };
+		8E41EDAE21CBA141004F9931 /* EstimationHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC678EF21C1302700514FF9 /* EstimationHistoryViewController.swift */; };
+		8E41EDAF21CBA14E004F9931 /* TutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC678D921C1302700514FF9 /* TutorialViewController.swift */; };
+		8E41EDB021CBA14E004F9931 /* BodyBankEnterpriseUI+Tutorial.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC678DB21C1302700514FF9 /* BodyBankEnterpriseUI+Tutorial.swift */; };
+		8E41EDB121CBA14E004F9931 /* BasePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC678DD21C1302700514FF9 /* BasePickerViewController.swift */; };
+		8E41EDB221CBA14E004F9931 /* WeightPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC678DE21C1302700514FF9 /* WeightPickerViewController.swift */; };
+		8E41EDB321CBA14E004F9931 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC678E021C1302700514FF9 /* CameraViewController.swift */; };
+		8E41EDB421CBA14E004F9931 /* AgePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC678E121C1302700514FF9 /* AgePickerViewController.swift */; };
+		8E41EDB521CBA14E004F9931 /* BodyBankEnterpriseUI+Camera.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC678E221C1302700514FF9 /* BodyBankEnterpriseUI+Camera.swift */; };
+		8E41EDB621CBA14E004F9931 /* HeightPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC678E421C1302700514FF9 /* HeightPickerViewController.swift */; };
+		8E41EDB721CBA155004F9931 /* PermissionUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC678C921C1302700514FF9 /* PermissionUtil.swift */; };
+		8E41EDB821CBA155004F9931 /* UINavigationBar+Gradation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC678CA21C1302700514FF9 /* UINavigationBar+Gradation.swift */; };
+		8E41EDB921CBA155004F9931 /* UIImageView-GeometryConvesion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC678CB21C1302700514FF9 /* UIImageView-GeometryConvesion.swift */; };
+		8E41EDBA21CBA155004F9931 /* UIView+Layer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC678CC21C1302700514FF9 /* UIView+Layer.swift */; };
+		8E41EDBB21CBA155004F9931 /* BlurFace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC678CD21C1302700514FF9 /* BlurFace.swift */; };
+		8E41EDBC21CBA155004F9931 /* CAGradientLayer+Alpha.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC678CE21C1302700514FF9 /* CAGradientLayer+Alpha.swift */; };
+		8E41EDBD21CBA155004F9931 /* UIImage+ExifRotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC678CF21C1302700514FF9 /* UIImage+ExifRotation.swift */; };
+		8E41EDBE21CBA155004F9931 /* CGRect+Center.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC678D021C1302700514FF9 /* CGRect+Center.swift */; };
+		8E41EDBF21CBA155004F9931 /* UITextField+BottomBorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC678D121C1302700514FF9 /* UITextField+BottomBorder.swift */; };
+		8E41EDC021CBA155004F9931 /* UIColor+RGB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC678D321C1302700514FF9 /* UIColor+RGB.swift */; };
+		8E41EDC121CBA155004F9931 /* UINavigationBar+BodyBank.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC678D421C1302700514FF9 /* UINavigationBar+BodyBank.swift */; };
+		8E41EDC221CBA155004F9931 /* NSLayoutConstraint+Change.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC678D521C1302700514FF9 /* NSLayoutConstraint+Change.swift */; };
+		8E41EDC321CBA155004F9931 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC678D621C1302700514FF9 /* Color.swift */; };
+		8E41EDC421CBA167004F9931 /* BodyBankEnterpriseUI.h in Sources */ = {isa = PBXBuildFile; fileRef = 8EC678F021C1302700514FF9 /* BodyBankEnterpriseUI.h */; };
+		8E41EDC521CBA17B004F9931 /* Tutorial.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8EC678D821C1302700514FF9 /* Tutorial.xcassets */; };
+		8E41EDC621CBA17B004F9931 /* Tutorial.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8EC678DA21C1302700514FF9 /* Tutorial.storyboard */; };
+		8E41EDC721CBA17B004F9931 /* Camera.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8EC678DF21C1302700514FF9 /* Camera.xcassets */; };
+		8E41EDC821CBA17B004F9931 /* Camera.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8EC678E321C1302700514FF9 /* Camera.storyboard */; };
+		8E41EDC921CBA17B004F9931 /* History.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8EC678E621C1302700514FF9 /* History.xcassets */; };
+		8E41EDCA21CBA17B004F9931 /* History.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8EC678EB21C1302700514FF9 /* History.storyboard */; };
 		8EC678AF21C1300700514FF9 /* BodyBankEnterpriseUIDemoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC678AE21C1300700514FF9 /* BodyBankEnterpriseUIDemoTests.swift */; };
 		8EC678BA21C1300800514FF9 /* BodyBankEnterpriseUIDemoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC678B921C1300700514FF9 /* BodyBankEnterpriseUIDemoUITests.swift */; };
-		8EC678F221C1302700514FF9 /* PermissionUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC678C921C1302700514FF9 /* PermissionUtil.swift */; };
-		8EC678F321C1302700514FF9 /* UINavigationBar+Gradation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC678CA21C1302700514FF9 /* UINavigationBar+Gradation.swift */; };
-		8EC678F421C1302700514FF9 /* UIImageView-GeometryConvesion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC678CB21C1302700514FF9 /* UIImageView-GeometryConvesion.swift */; };
-		8EC678F521C1302700514FF9 /* UIView+Layer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC678CC21C1302700514FF9 /* UIView+Layer.swift */; };
-		8EC678F621C1302700514FF9 /* BlurFace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC678CD21C1302700514FF9 /* BlurFace.swift */; };
-		8EC678F721C1302700514FF9 /* CAGradientLayer+Alpha.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC678CE21C1302700514FF9 /* CAGradientLayer+Alpha.swift */; };
-		8EC678F821C1302700514FF9 /* UIImage+ExifRotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC678CF21C1302700514FF9 /* UIImage+ExifRotation.swift */; };
-		8EC678F921C1302700514FF9 /* CGRect+Center.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC678D021C1302700514FF9 /* CGRect+Center.swift */; };
-		8EC678FA21C1302700514FF9 /* UITextField+BottomBorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC678D121C1302700514FF9 /* UITextField+BottomBorder.swift */; };
-		8EC678FC21C1302700514FF9 /* UIColor+RGB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC678D321C1302700514FF9 /* UIColor+RGB.swift */; };
-		8EC678FD21C1302700514FF9 /* UINavigationBar+BodyBank.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC678D421C1302700514FF9 /* UINavigationBar+BodyBank.swift */; };
-		8EC678FE21C1302700514FF9 /* NSLayoutConstraint+Change.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC678D521C1302700514FF9 /* NSLayoutConstraint+Change.swift */; };
-		8EC678FF21C1302700514FF9 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC678D621C1302700514FF9 /* Color.swift */; };
-		8EC6790021C1302700514FF9 /* Tutorial.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8EC678D821C1302700514FF9 /* Tutorial.xcassets */; };
-		8EC6790121C1302700514FF9 /* TutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC678D921C1302700514FF9 /* TutorialViewController.swift */; };
-		8EC6790221C1302700514FF9 /* Tutorial.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8EC678DA21C1302700514FF9 /* Tutorial.storyboard */; };
-		8EC6790321C1302700514FF9 /* BodyBankEnterpriseUI+Tutorial.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC678DB21C1302700514FF9 /* BodyBankEnterpriseUI+Tutorial.swift */; };
-		8EC6790421C1302700514FF9 /* BasePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC678DD21C1302700514FF9 /* BasePickerViewController.swift */; };
-		8EC6790521C1302700514FF9 /* WeightPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC678DE21C1302700514FF9 /* WeightPickerViewController.swift */; };
-		8EC6790621C1302700514FF9 /* Camera.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8EC678DF21C1302700514FF9 /* Camera.xcassets */; };
-		8EC6790721C1302700514FF9 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC678E021C1302700514FF9 /* CameraViewController.swift */; };
-		8EC6790821C1302700514FF9 /* AgePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC678E121C1302700514FF9 /* AgePickerViewController.swift */; };
-		8EC6790921C1302700514FF9 /* BodyBankEnterpriseUI+Camera.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC678E221C1302700514FF9 /* BodyBankEnterpriseUI+Camera.swift */; };
-		8EC6790A21C1302700514FF9 /* Camera.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8EC678E321C1302700514FF9 /* Camera.storyboard */; };
-		8EC6790B21C1302700514FF9 /* HeightPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC678E421C1302700514FF9 /* HeightPickerViewController.swift */; };
-		8EC6790C21C1302700514FF9 /* History.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8EC678E621C1302700514FF9 /* History.xcassets */; };
-		8EC6790D21C1302700514FF9 /* ImagePageItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC678E721C1302700514FF9 /* ImagePageItemViewController.swift */; };
-		8EC6790E21C1302700514FF9 /* EstimationHistoryListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC678E821C1302700514FF9 /* EstimationHistoryListCell.swift */; };
-		8EC6790F21C1302700514FF9 /* EstimationHistoryImagesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC678E921C1302700514FF9 /* EstimationHistoryImagesCell.swift */; };
-		8EC6791021C1302700514FF9 /* EstimationHistoryResultEntryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC678EA21C1302700514FF9 /* EstimationHistoryResultEntryCell.swift */; };
-		8EC6791121C1302700514FF9 /* History.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8EC678EB21C1302700514FF9 /* History.storyboard */; };
-		8EC6791221C1302700514FF9 /* HistoryDetailImagePageLayouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC678EC21C1302700514FF9 /* HistoryDetailImagePageLayouter.swift */; };
-		8EC6791321C1302700514FF9 /* EstimationHistoryListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC678ED21C1302700514FF9 /* EstimationHistoryListViewController.swift */; };
-		8EC6791421C1302700514FF9 /* BodyBankEnterpriseUI+History.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC678EE21C1302700514FF9 /* BodyBankEnterpriseUI+History.swift */; };
-		8EC6791521C1302700514FF9 /* EstimationHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC678EF21C1302700514FF9 /* EstimationHistoryViewController.swift */; };
-		8EC6791821C1348000514FF9 /* BodyBankEnterpriseUI.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 8EC6791721C1348000514FF9 /* BodyBankEnterpriseUI.podspec */; };
 		9604490424E77AC948032437 /* Pods_BodyBankEnterpriseUIDemoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27929CF47E5B5D866E21C68 /* Pods_BodyBankEnterpriseUIDemoTests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		8E41ED8D21CB9ED9004F9931 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8EC6788E21C1300600514FF9 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8E41ED8221CB9ED9004F9931;
+			remoteInfo = BodyBankEnterpriseUI;
+		};
+		8E41ED8F21CB9ED9004F9931 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8EC6788E21C1300600514FF9 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8EC6789521C1300600514FF9;
+			remoteInfo = BodyBankEnterpriseUIDemo;
+		};
+		8E41ED9621CB9ED9004F9931 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8EC6788E21C1300600514FF9 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8E41ED8221CB9ED9004F9931;
+			remoteInfo = BodyBankEnterpriseUI;
+		};
 		8EC678AB21C1300700514FF9 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 8EC6788E21C1300600514FF9 /* Project object */;
@@ -73,12 +99,32 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		8E41ED9F21CB9ED9004F9931 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				8E41ED9921CB9ED9004F9931 /* BodyBankEnterpriseUI.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		03E6BB0C502A91F3C0679830 /* Pods-BodyBankEnterpriseUIDemoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BodyBankEnterpriseUIDemoTests.release.xcconfig"; path = "Target Support Files/Pods-BodyBankEnterpriseUIDemoTests/Pods-BodyBankEnterpriseUIDemoTests.release.xcconfig"; sourceTree = "<group>"; };
 		18C663CDD76B3E2334214CAE /* Pods-BodyBankEnterpriseUIDemoUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BodyBankEnterpriseUIDemoUITests.release.xcconfig"; path = "Target Support Files/Pods-BodyBankEnterpriseUIDemoUITests/Pods-BodyBankEnterpriseUIDemoUITests.release.xcconfig"; sourceTree = "<group>"; };
 		1C36B5A2375375D38CA36884 /* Pods-BodyBankEnterpriseUIDemoUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BodyBankEnterpriseUIDemoUITests.debug.xcconfig"; path = "Target Support Files/Pods-BodyBankEnterpriseUIDemoUITests/Pods-BodyBankEnterpriseUIDemoUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		7A0240D91454823AC4856F1D /* Pods_BodyBankEnterpriseUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BodyBankEnterpriseUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		82A96B4540DFA9819D8956BF /* Pods-BodyBankEnterpriseUIDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BodyBankEnterpriseUIDemo.release.xcconfig"; path = "Target Support Files/Pods-BodyBankEnterpriseUIDemo/Pods-BodyBankEnterpriseUIDemo.release.xcconfig"; sourceTree = "<group>"; };
 		8A9CE5BC768C3FD2EA0A5948 /* Pods-BodyBankEnterpriseUIDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BodyBankEnterpriseUIDemo.debug.xcconfig"; path = "Target Support Files/Pods-BodyBankEnterpriseUIDemo/Pods-BodyBankEnterpriseUIDemo.debug.xcconfig"; sourceTree = "<group>"; };
+		8E41ED8321CB9ED9004F9931 /* BodyBankEnterpriseUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BodyBankEnterpriseUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8E41ED8621CB9ED9004F9931 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8E41ED8B21CB9ED9004F9931 /* BodyBankEnterpriseUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BodyBankEnterpriseUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		8E41ED9221CB9ED9004F9931 /* BodyBankEnterpriseUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BodyBankEnterpriseUITests.swift; sourceTree = "<group>"; };
+		8E41ED9421CB9ED9004F9931 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8E593A2921C1975E00505DC0 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../../README.md; sourceTree = "<group>"; };
 		8EC6789621C1300600514FF9 /* BodyBankEnterpriseUIDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BodyBankEnterpriseUIDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8EC6789921C1300600514FF9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -129,19 +175,38 @@
 		8EC678EE21C1302700514FF9 /* BodyBankEnterpriseUI+History.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "BodyBankEnterpriseUI+History.swift"; sourceTree = "<group>"; };
 		8EC678EF21C1302700514FF9 /* EstimationHistoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EstimationHistoryViewController.swift; sourceTree = "<group>"; };
 		8EC678F021C1302700514FF9 /* BodyBankEnterpriseUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BodyBankEnterpriseUI.h; sourceTree = "<group>"; };
-		8EC6791721C1348000514FF9 /* BodyBankEnterpriseUI.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; fileEncoding = 4; name = BodyBankEnterpriseUI.podspec; path = ../../BodyBankEnterpriseUI.podspec; sourceTree = "<group>"; };
+		8EC6791721C1348000514FF9 /* BodyBankEnterpriseUI.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; fileEncoding = 4; path = BodyBankEnterpriseUI.podspec; sourceTree = "<group>"; };
 		9496FFFFD2B38BF06AD75F4C /* Pods-BodyBankEnterpriseUIDemoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BodyBankEnterpriseUIDemoTests.debug.xcconfig"; path = "Target Support Files/Pods-BodyBankEnterpriseUIDemoTests/Pods-BodyBankEnterpriseUIDemoTests.debug.xcconfig"; sourceTree = "<group>"; };
 		9A4157A5218D429C756B3D29 /* Pods_BodyBankEnterpriseUIDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BodyBankEnterpriseUIDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BB9C960C5ABDFAF0102BF672 /* Pods-BodyBankEnterpriseUI.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BodyBankEnterpriseUI.release.xcconfig"; path = "Target Support Files/Pods-BodyBankEnterpriseUI/Pods-BodyBankEnterpriseUI.release.xcconfig"; sourceTree = "<group>"; };
+		C8D387D3A869694982614B78 /* Pods-BodyBankEnterpriseUI.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BodyBankEnterpriseUI.debug.xcconfig"; path = "Target Support Files/Pods-BodyBankEnterpriseUI/Pods-BodyBankEnterpriseUI.debug.xcconfig"; sourceTree = "<group>"; };
 		E61948E930D496589DBA3F1B /* Pods_BodyBankEnterpriseUIDemoUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BodyBankEnterpriseUIDemoUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F27929CF47E5B5D866E21C68 /* Pods_BodyBankEnterpriseUIDemoTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BodyBankEnterpriseUIDemoTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		8E41ED8021CB9ED9004F9931 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2FC366CB33DA99FF6C281DF2 /* Pods_BodyBankEnterpriseUI.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8E41ED8821CB9ED9004F9931 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8E41ED8C21CB9ED9004F9931 /* BodyBankEnterpriseUI.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8EC6789321C1300600514FF9 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				5950A27FAD8F2EF0746E1888 /* Pods_BodyBankEnterpriseUIDemo.framework in Frameworks */,
+				8E41ED9821CB9ED9004F9931 /* BodyBankEnterpriseUI.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -170,8 +235,28 @@
 				9A4157A5218D429C756B3D29 /* Pods_BodyBankEnterpriseUIDemo.framework */,
 				F27929CF47E5B5D866E21C68 /* Pods_BodyBankEnterpriseUIDemoTests.framework */,
 				E61948E930D496589DBA3F1B /* Pods_BodyBankEnterpriseUIDemoUITests.framework */,
+				7A0240D91454823AC4856F1D /* Pods_BodyBankEnterpriseUI.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		8E41ED8421CB9ED9004F9931 /* BodyBankEnterpriseUI */ = {
+			isa = PBXGroup;
+			children = (
+				8EC6791721C1348000514FF9 /* BodyBankEnterpriseUI.podspec */,
+				8EC678C721C1302700514FF9 /* BodyBankEnterpriseUI */,
+				8E41ED8621CB9ED9004F9931 /* Info.plist */,
+			);
+			path = BodyBankEnterpriseUI;
+			sourceTree = "<group>";
+		};
+		8E41ED9121CB9ED9004F9931 /* BodyBankEnterpriseUITests */ = {
+			isa = PBXGroup;
+			children = (
+				8E41ED9221CB9ED9004F9931 /* BodyBankEnterpriseUITests.swift */,
+				8E41ED9421CB9ED9004F9931 /* Info.plist */,
+			);
+			path = BodyBankEnterpriseUITests;
 			sourceTree = "<group>";
 		};
 		8EC6788D21C1300600514FF9 = {
@@ -180,6 +265,8 @@
 				8EC6789821C1300600514FF9 /* BodyBankEnterpriseUIDemo */,
 				8EC678AD21C1300700514FF9 /* BodyBankEnterpriseUIDemoTests */,
 				8EC678B821C1300700514FF9 /* BodyBankEnterpriseUIDemoUITests */,
+				8E41ED8421CB9ED9004F9931 /* BodyBankEnterpriseUI */,
+				8E41ED9121CB9ED9004F9931 /* BodyBankEnterpriseUITests */,
 				8EC6789721C1300600514FF9 /* Products */,
 				9F9E7BFC51D406732E523BE7 /* Pods */,
 				82FAD4996779CE73455B7D80 /* Frameworks */,
@@ -192,6 +279,8 @@
 				8EC6789621C1300600514FF9 /* BodyBankEnterpriseUIDemo.app */,
 				8EC678AA21C1300700514FF9 /* BodyBankEnterpriseUIDemoTests.xctest */,
 				8EC678B521C1300700514FF9 /* BodyBankEnterpriseUIDemoUITests.xctest */,
+				8E41ED8321CB9ED9004F9931 /* BodyBankEnterpriseUI.framework */,
+				8E41ED8B21CB9ED9004F9931 /* BodyBankEnterpriseUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -200,8 +289,6 @@
 			isa = PBXGroup;
 			children = (
 				8E593A2921C1975E00505DC0 /* README.md */,
-				8EC6791721C1348000514FF9 /* BodyBankEnterpriseUI.podspec */,
-				8EC678C721C1302700514FF9 /* BodyBankEnterpriseUI */,
 				8EC6789921C1300600514FF9 /* AppDelegate.swift */,
 				8EC6789B21C1300600514FF9 /* ViewController.swift */,
 				8EC6789D21C1300600514FF9 /* Main.storyboard */,
@@ -239,8 +326,7 @@
 				8EC678E521C1302700514FF9 /* History */,
 				8EC678F021C1302700514FF9 /* BodyBankEnterpriseUI.h */,
 			);
-			name = BodyBankEnterpriseUI;
-			path = ../../BodyBankEnterpriseUI;
+			path = BodyBankEnterpriseUI;
 			sourceTree = "<group>";
 		};
 		8EC678C821C1302700514FF9 /* Misc */ = {
@@ -315,13 +401,63 @@
 				03E6BB0C502A91F3C0679830 /* Pods-BodyBankEnterpriseUIDemoTests.release.xcconfig */,
 				1C36B5A2375375D38CA36884 /* Pods-BodyBankEnterpriseUIDemoUITests.debug.xcconfig */,
 				18C663CDD76B3E2334214CAE /* Pods-BodyBankEnterpriseUIDemoUITests.release.xcconfig */,
+				C8D387D3A869694982614B78 /* Pods-BodyBankEnterpriseUI.debug.xcconfig */,
+				BB9C960C5ABDFAF0102BF672 /* Pods-BodyBankEnterpriseUI.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
+/* Begin PBXHeadersBuildPhase section */
+		8E41ED7E21CB9ED9004F9931 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
 /* Begin PBXNativeTarget section */
+		8E41ED8221CB9ED9004F9931 /* BodyBankEnterpriseUI */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8E41ED9E21CB9ED9004F9931 /* Build configuration list for PBXNativeTarget "BodyBankEnterpriseUI" */;
+			buildPhases = (
+				E8C6068BC27BF2C45E575034 /* [CP] Check Pods Manifest.lock */,
+				8E41ED7E21CB9ED9004F9931 /* Headers */,
+				8E41ED7F21CB9ED9004F9931 /* Sources */,
+				8E41ED8021CB9ED9004F9931 /* Frameworks */,
+				8E41ED8121CB9ED9004F9931 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = BodyBankEnterpriseUI;
+			productName = BodyBankEnterpriseUI;
+			productReference = 8E41ED8321CB9ED9004F9931 /* BodyBankEnterpriseUI.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		8E41ED8A21CB9ED9004F9931 /* BodyBankEnterpriseUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8E41EDA021CB9ED9004F9931 /* Build configuration list for PBXNativeTarget "BodyBankEnterpriseUITests" */;
+			buildPhases = (
+				8E41ED8721CB9ED9004F9931 /* Sources */,
+				8E41ED8821CB9ED9004F9931 /* Frameworks */,
+				8E41ED8921CB9ED9004F9931 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				8E41ED8E21CB9ED9004F9931 /* PBXTargetDependency */,
+				8E41ED9021CB9ED9004F9931 /* PBXTargetDependency */,
+			);
+			name = BodyBankEnterpriseUITests;
+			productName = BodyBankEnterpriseUITests;
+			productReference = 8E41ED8B21CB9ED9004F9931 /* BodyBankEnterpriseUITests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		8EC6789521C1300600514FF9 /* BodyBankEnterpriseUIDemo */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8EC678BE21C1300800514FF9 /* Build configuration list for PBXNativeTarget "BodyBankEnterpriseUIDemo" */;
@@ -331,10 +467,12 @@
 				8EC6789321C1300600514FF9 /* Frameworks */,
 				8EC6789421C1300600514FF9 /* Resources */,
 				4A7F3E55A9DF907A5F00296C /* [CP] Embed Pods Frameworks */,
+				8E41ED9F21CB9ED9004F9931 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				8E41ED9721CB9ED9004F9931 /* PBXTargetDependency */,
 			);
 			name = BodyBankEnterpriseUIDemo;
 			productName = BodyBankEnterpriseUIDemo;
@@ -389,6 +527,13 @@
 				LastUpgradeCheck = 1010;
 				ORGANIZATIONNAME = "Original Inc.";
 				TargetAttributes = {
+					8E41ED8221CB9ED9004F9931 = {
+						CreatedOnToolsVersion = 10.1;
+					};
+					8E41ED8A21CB9ED9004F9931 = {
+						CreatedOnToolsVersion = 10.1;
+						TestTargetID = 8EC6789521C1300600514FF9;
+					};
 					8EC6789521C1300600514FF9 = {
 						CreatedOnToolsVersion = 10.1;
 					};
@@ -418,26 +563,41 @@
 				8EC6789521C1300600514FF9 /* BodyBankEnterpriseUIDemo */,
 				8EC678A921C1300700514FF9 /* BodyBankEnterpriseUIDemoTests */,
 				8EC678B421C1300700514FF9 /* BodyBankEnterpriseUIDemoUITests */,
+				8E41ED8221CB9ED9004F9931 /* BodyBankEnterpriseUI */,
+				8E41ED8A21CB9ED9004F9931 /* BodyBankEnterpriseUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		8E41ED8121CB9ED9004F9931 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8E41EDC521CBA17B004F9931 /* Tutorial.xcassets in Resources */,
+				8E41EDC621CBA17B004F9931 /* Tutorial.storyboard in Resources */,
+				8E41EDC721CBA17B004F9931 /* Camera.xcassets in Resources */,
+				8E41EDC821CBA17B004F9931 /* Camera.storyboard in Resources */,
+				8E41EDC921CBA17B004F9931 /* History.xcassets in Resources */,
+				8E41EDCA21CBA17B004F9931 /* History.storyboard in Resources */,
+				8E41EDA121CB9EE7004F9931 /* BodyBankEnterpriseUI.podspec in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8E41ED8921CB9ED9004F9931 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8EC6789421C1300600514FF9 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8EC6790221C1302700514FF9 /* Tutorial.storyboard in Resources */,
-				8EC6790A21C1302700514FF9 /* Camera.storyboard in Resources */,
-				8EC678A421C1300700514FF9 /* LaunchScreen.storyboard in Resources */,
-				8EC6790021C1302700514FF9 /* Tutorial.xcassets in Resources */,
-				8EC678A121C1300700514FF9 /* Assets.xcassets in Resources */,
-				8EC6790621C1302700514FF9 /* Camera.xcassets in Resources */,
-				8EC6790C21C1302700514FF9 /* History.xcassets in Resources */,
-				8EC6789F21C1300600514FF9 /* Main.storyboard in Resources */,
-				8EC6791121C1302700514FF9 /* History.storyboard in Resources */,
-				8E593A2A21C1975E00505DC0 /* README.md in Resources */,
-				8EC6791821C1348000514FF9 /* BodyBankEnterpriseUI.podspec in Resources */,
+				8E41EDA421CBA050004F9931 /* Main.storyboard in Resources */,
+				8E41EDA521CBA050004F9931 /* Assets.xcassets in Resources */,
+				8E41EDA621CBA050004F9931 /* LaunchScreen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -489,21 +649,21 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-BodyBankEnterpriseUIDemo/Pods-BodyBankEnterpriseUIDemo-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/AFDateHelper/AFDateHelper.framework",
 				"${BUILT_PRODUCTS_DIR}/AWSAppSync/AWSAppSync.framework",
 				"${BUILT_PRODUCTS_DIR}/AWSCore/AWSCore.framework",
 				"${BUILT_PRODUCTS_DIR}/AWSS3/AWSS3.framework",
-				"${BUILT_PRODUCTS_DIR}/Alertift/Alertift.framework",
 				"${PODS_ROOT}/BodyBankEnterprise/BodyBankEnterprise.framework",
 				"${BUILT_PRODUCTS_DIR}/FCFileManager/FCFileManager.framework",
 				"${BUILT_PRODUCTS_DIR}/JWTDecode/JWTDecode.framework",
 				"${BUILT_PRODUCTS_DIR}/KeychainSwift/KeychainSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/ReachabilitySwift/Reachability.framework",
+				"${BUILT_PRODUCTS_DIR}/SQLite.swift/SQLite.framework",
+				"${BUILT_PRODUCTS_DIR}/AFDateHelper/AFDateHelper.framework",
+				"${BUILT_PRODUCTS_DIR}/Alertift/Alertift.framework",
 				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
 				"${BUILT_PRODUCTS_DIR}/NVActivityIndicatorView/NVActivityIndicatorView.framework",
-				"${BUILT_PRODUCTS_DIR}/ReachabilitySwift/Reachability.framework",
 				"${BUILT_PRODUCTS_DIR}/SCPageViewController/SCPageViewController.framework",
 				"${BUILT_PRODUCTS_DIR}/SCScrollView/SCScrollView.framework",
-				"${BUILT_PRODUCTS_DIR}/SQLite.swift/SQLite.framework",
 				"${BUILT_PRODUCTS_DIR}/SimpleImageViewerNew/SimpleImageViewerNew.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftSpinner/SwiftSpinner.framework",
 			);
@@ -511,21 +671,21 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AFDateHelper.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSAppSync.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSCore.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSS3.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alertift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BodyBankEnterprise.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FCFileManager.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JWTDecode.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KeychainSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Reachability.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SQLite.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AFDateHelper.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alertift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NVActivityIndicatorView.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Reachability.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SCPageViewController.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SCScrollView.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SQLite.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SimpleImageViewerNew.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftSpinner.framework",
 			);
@@ -578,44 +738,82 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		E8C6068BC27BF2C45E575034 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-BodyBankEnterpriseUI-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		8E41ED7F21CB9ED9004F9931 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8E41EDC421CBA167004F9931 /* BodyBankEnterpriseUI.h in Sources */,
+				8E41EDB721CBA155004F9931 /* PermissionUtil.swift in Sources */,
+				8E41EDB821CBA155004F9931 /* UINavigationBar+Gradation.swift in Sources */,
+				8E41EDB921CBA155004F9931 /* UIImageView-GeometryConvesion.swift in Sources */,
+				8E41EDBA21CBA155004F9931 /* UIView+Layer.swift in Sources */,
+				8E41EDBB21CBA155004F9931 /* BlurFace.swift in Sources */,
+				8E41EDBC21CBA155004F9931 /* CAGradientLayer+Alpha.swift in Sources */,
+				8E41EDBD21CBA155004F9931 /* UIImage+ExifRotation.swift in Sources */,
+				8E41EDBE21CBA155004F9931 /* CGRect+Center.swift in Sources */,
+				8E41EDBF21CBA155004F9931 /* UITextField+BottomBorder.swift in Sources */,
+				8E41EDC021CBA155004F9931 /* UIColor+RGB.swift in Sources */,
+				8E41EDC121CBA155004F9931 /* UINavigationBar+BodyBank.swift in Sources */,
+				8E41EDC221CBA155004F9931 /* NSLayoutConstraint+Change.swift in Sources */,
+				8E41EDC321CBA155004F9931 /* Color.swift in Sources */,
+				8E41EDAF21CBA14E004F9931 /* TutorialViewController.swift in Sources */,
+				8E41EDB021CBA14E004F9931 /* BodyBankEnterpriseUI+Tutorial.swift in Sources */,
+				8E41EDB121CBA14E004F9931 /* BasePickerViewController.swift in Sources */,
+				8E41EDB221CBA14E004F9931 /* WeightPickerViewController.swift in Sources */,
+				8E41EDB321CBA14E004F9931 /* CameraViewController.swift in Sources */,
+				8E41EDB421CBA14E004F9931 /* AgePickerViewController.swift in Sources */,
+				8E41EDB521CBA14E004F9931 /* BodyBankEnterpriseUI+Camera.swift in Sources */,
+				8E41EDB621CBA14E004F9931 /* HeightPickerViewController.swift in Sources */,
+				8E41EDA721CBA141004F9931 /* ImagePageItemViewController.swift in Sources */,
+				8E41EDA821CBA141004F9931 /* EstimationHistoryListCell.swift in Sources */,
+				8E41EDA921CBA141004F9931 /* EstimationHistoryImagesCell.swift in Sources */,
+				8E41EDAA21CBA141004F9931 /* EstimationHistoryResultEntryCell.swift in Sources */,
+				8E41EDAB21CBA141004F9931 /* HistoryDetailImagePageLayouter.swift in Sources */,
+				8E41EDAC21CBA141004F9931 /* EstimationHistoryListViewController.swift in Sources */,
+				8E41EDAD21CBA141004F9931 /* BodyBankEnterpriseUI+History.swift in Sources */,
+				8E41EDAE21CBA141004F9931 /* EstimationHistoryViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8E41ED8721CB9ED9004F9931 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8E41ED9321CB9ED9004F9931 /* BodyBankEnterpriseUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8EC6789221C1300600514FF9 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8EC6791221C1302700514FF9 /* HistoryDetailImagePageLayouter.swift in Sources */,
-				8EC678F921C1302700514FF9 /* CGRect+Center.swift in Sources */,
-				8EC6791421C1302700514FF9 /* BodyBankEnterpriseUI+History.swift in Sources */,
-				8EC6789C21C1300600514FF9 /* ViewController.swift in Sources */,
-				8EC678FC21C1302700514FF9 /* UIColor+RGB.swift in Sources */,
-				8EC6790421C1302700514FF9 /* BasePickerViewController.swift in Sources */,
-				8EC678F321C1302700514FF9 /* UINavigationBar+Gradation.swift in Sources */,
-				8EC678F421C1302700514FF9 /* UIImageView-GeometryConvesion.swift in Sources */,
-				8EC678FF21C1302700514FF9 /* Color.swift in Sources */,
-				8EC678F221C1302700514FF9 /* PermissionUtil.swift in Sources */,
-				8EC6790521C1302700514FF9 /* WeightPickerViewController.swift in Sources */,
-				8EC678F821C1302700514FF9 /* UIImage+ExifRotation.swift in Sources */,
-				8EC6790B21C1302700514FF9 /* HeightPickerViewController.swift in Sources */,
-				8EC6790321C1302700514FF9 /* BodyBankEnterpriseUI+Tutorial.swift in Sources */,
-				8EC6791521C1302700514FF9 /* EstimationHistoryViewController.swift in Sources */,
-				8EC6790721C1302700514FF9 /* CameraViewController.swift in Sources */,
-				8EC6790E21C1302700514FF9 /* EstimationHistoryListCell.swift in Sources */,
-				8EC6790921C1302700514FF9 /* BodyBankEnterpriseUI+Camera.swift in Sources */,
-				8EC678F521C1302700514FF9 /* UIView+Layer.swift in Sources */,
-				8EC6789A21C1300600514FF9 /* AppDelegate.swift in Sources */,
-				8EC6791021C1302700514FF9 /* EstimationHistoryResultEntryCell.swift in Sources */,
-				8EC678FD21C1302700514FF9 /* UINavigationBar+BodyBank.swift in Sources */,
-				8EC678F721C1302700514FF9 /* CAGradientLayer+Alpha.swift in Sources */,
-				8EC678F621C1302700514FF9 /* BlurFace.swift in Sources */,
-				8EC6791321C1302700514FF9 /* EstimationHistoryListViewController.swift in Sources */,
-				8EC6790F21C1302700514FF9 /* EstimationHistoryImagesCell.swift in Sources */,
-				8EC6790121C1302700514FF9 /* TutorialViewController.swift in Sources */,
-				8EC6790821C1302700514FF9 /* AgePickerViewController.swift in Sources */,
-				8EC678FE21C1302700514FF9 /* NSLayoutConstraint+Change.swift in Sources */,
-				8EC6790D21C1302700514FF9 /* ImagePageItemViewController.swift in Sources */,
-				8EC678FA21C1302700514FF9 /* UITextField+BottomBorder.swift in Sources */,
+				8E41EDA221CBA045004F9931 /* AppDelegate.swift in Sources */,
+				8E41EDA321CBA045004F9931 /* ViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -638,6 +836,21 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		8E41ED8E21CB9ED9004F9931 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8E41ED8221CB9ED9004F9931 /* BodyBankEnterpriseUI */;
+			targetProxy = 8E41ED8D21CB9ED9004F9931 /* PBXContainerItemProxy */;
+		};
+		8E41ED9021CB9ED9004F9931 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8EC6789521C1300600514FF9 /* BodyBankEnterpriseUIDemo */;
+			targetProxy = 8E41ED8F21CB9ED9004F9931 /* PBXContainerItemProxy */;
+		};
+		8E41ED9721CB9ED9004F9931 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8E41ED8221CB9ED9004F9931 /* BodyBankEnterpriseUI */;
+			targetProxy = 8E41ED9621CB9ED9004F9931 /* PBXContainerItemProxy */;
+		};
 		8EC678AC21C1300700514FF9 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 8EC6789521C1300600514FF9 /* BodyBankEnterpriseUIDemo */;
@@ -670,6 +883,104 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		8E41ED9A21CB9ED9004F9931 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = C8D387D3A869694982614B78 /* Pods-BodyBankEnterpriseUI.debug.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = 8R8U92HLHH;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = BodyBankEnterpriseUI/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.bodybank.BodyBankEnterpriseUI;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		8E41ED9B21CB9ED9004F9931 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = BB9C960C5ABDFAF0102BF672 /* Pods-BodyBankEnterpriseUI.release.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = 8R8U92HLHH;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = BodyBankEnterpriseUI/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.bodybank.BodyBankEnterpriseUI;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		8E41ED9C21CB9ED9004F9931 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 8R8U92HLHH;
+				INFOPLIST_FILE = BodyBankEnterpriseUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.bodybank.BodyBankEnterpriseUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BodyBankEnterpriseUIDemo.app/BodyBankEnterpriseUIDemo";
+			};
+			name = Debug;
+		};
+		8E41ED9D21CB9ED9004F9931 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 8R8U92HLHH;
+				INFOPLIST_FILE = BodyBankEnterpriseUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.bodybank.BodyBankEnterpriseUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BodyBankEnterpriseUIDemo.app/BodyBankEnterpriseUIDemo";
+			};
+			name = Release;
+		};
 		8EC678BC21C1300800514FF9 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -790,6 +1101,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 8A9CE5BC768C3FD2EA0A5948 /* Pods-BodyBankEnterpriseUIDemo.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 8R8U92HLHH;
@@ -809,6 +1121,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 82A96B4540DFA9819D8956BF /* Pods-BodyBankEnterpriseUIDemo.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 8R8U92HLHH;
@@ -913,6 +1226,24 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		8E41ED9E21CB9ED9004F9931 /* Build configuration list for PBXNativeTarget "BodyBankEnterpriseUI" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8E41ED9A21CB9ED9004F9931 /* Debug */,
+				8E41ED9B21CB9ED9004F9931 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8E41EDA021CB9ED9004F9931 /* Build configuration list for PBXNativeTarget "BodyBankEnterpriseUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8E41ED9C21CB9ED9004F9931 /* Debug */,
+				8E41ED9D21CB9ED9004F9931 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		8EC6789121C1300600514FF9 /* Build configuration list for PBXProject "BodyBankEnterpriseUIDemo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
