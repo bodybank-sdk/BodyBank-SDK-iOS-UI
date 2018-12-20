@@ -36,7 +36,7 @@
         <!--Camera View Controller-->
         <scene sceneID="Bs8-D5-M2U">
             <objects>
-                <viewController id="kRG-2n-lZQ" customClass="CameraViewController" customModule="BodyBankEnterpriseUI" sceneMemberID="viewController">
+                <viewController id="kRG-2n-lZQ" customClass="CameraViewController" customModule="BodyBankEnterpriseUI" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="RGL-ya-Qlj">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -397,7 +397,7 @@
         <!--Height Picker View Controller-->
         <scene sceneID="8Lb-JZ-qUf">
             <objects>
-                <viewController id="k25-TH-hld" customClass="HeightPickerViewController" customModule="BodyBankEnterpriseUI" sceneMemberID="viewController">
+                <viewController id="k25-TH-hld" customClass="HeightPickerViewController" customModule="BodyBankEnterpriseUI" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="2Td-ka-KRP">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -550,7 +550,7 @@
         <!--Weight Picker View Controller-->
         <scene sceneID="K4n-nU-Tv9">
             <objects>
-                <viewController id="pOD-c5-Nyr" customClass="WeightPickerViewController" customModule="BodyBankEnterpriseUI" sceneMemberID="viewController">
+                <viewController id="pOD-c5-Nyr" customClass="WeightPickerViewController" customModule="BodyBankEnterpriseUI" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="F0O-vc-MiG">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -704,7 +704,7 @@
         <!--Age Picker View Controller-->
         <scene sceneID="hb4-0X-6Wx">
             <objects>
-                <viewController id="EsD-xz-tIO" customClass="AgePickerViewController" customModule="BodyBankEnterpriseUI" sceneMemberID="viewController">
+                <viewController id="EsD-xz-tIO" customClass="AgePickerViewController" customModule="BodyBankEnterpriseUI" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="hBA-Xv-cCf">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
