@@ -167,7 +167,6 @@ open class CameraViewController: UIViewController {
         }
         lockingTouch = true
         stopListeningGyro()
-        BodyBankEnterprise.unsubscribeEstimationRequests()
     }
     
     open override func viewDidDisappear(_ animated: Bool) {
