@@ -13,7 +13,7 @@
         <!--History-->
         <scene sceneID="xeX-Lf-cCy">
             <objects>
-                <tableViewController id="6aX-yo-yRD" customClass="EstimationHistoryListViewController" customModule="BodyBankEnterpriseUI" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="6aX-yo-yRD" customClass="EstimationHistoryListViewController" customModule="BodyBankEnterpriseUI" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="9XC-Qs-Pta">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -136,7 +136,7 @@
         <!--Estimation History View Controller-->
         <scene sceneID="aLT-HF-yXf">
             <objects>
-                <tableViewController id="ay9-Nc-21Z" customClass="EstimationHistoryViewController" customModule="BodyBankEnterpriseUI" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="ay9-Nc-21Z" customClass="EstimationHistoryViewController" customModule="BodyBankEnterpriseUI" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="1" sectionFooterHeight="1" id="Gsd-rD-Ayh">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -293,7 +293,7 @@
         <!--Image Page Item View Controller-->
         <scene sceneID="Vg2-Ru-ETu">
             <objects>
-                <viewController storyboardIdentifier="ImagePageItem" id="1Ab-zz-ZTe" customClass="ImagePageItemViewController" customModule="BodyBankEnterpriseUI" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ImagePageItem" id="1Ab-zz-ZTe" customClass="ImagePageItemViewController" customModule="BodyBankEnterpriseUI" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="lqn-ET-HXL">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
