@@ -845,5 +845,11 @@ extension CameraViewController {
         }
         captureButton.isEnabled = capturable
     }
+    
+    open func reset(){
+        capturingFront = true
+        estimationParameter.clear()
+        reloadParameters()
+    }
 }
 
