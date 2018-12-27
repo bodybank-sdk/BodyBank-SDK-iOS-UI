@@ -123,6 +123,7 @@
                     <navigationItem key="navigationItem" title="History" id="nkg-Eu-bVK">
                         <barButtonItem key="leftBarButtonItem" systemItem="stop" id="cgV-AF-PaG">
                             <connections>
+                                <action selector="closeButtonDidTapWithSender:" destination="6aX-yo-yRD" id="kap-cy-JQS"/>
                                 <segue destination="cCp-No-sgt" kind="unwind" unwindAction="meViewDidCloseWithSender:" id="KcC-m6-hbA"/>
                             </connections>
                         </barButtonItem>
