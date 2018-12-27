@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
     s.name = 'BodyBankEnterpriseUI'
     s.summary = 'BodyBank Enterprise iOS UI SDK'
-    s.version = '0.0.27'
+    s.version = '0.0.28'
     s.author = 'Original Inc.'
     s.license = { :type => 'MIT', :file => 'LICENSE' }
 

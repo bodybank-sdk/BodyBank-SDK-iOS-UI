@@ -123,14 +123,12 @@
                     <navigationItem key="navigationItem" title="History" id="nkg-Eu-bVK">
                         <barButtonItem key="leftBarButtonItem" systemItem="stop" id="cgV-AF-PaG">
                             <connections>
-                                <action selector="closeButtonDidTapWithSender:" destination="6aX-yo-yRD" id="kap-cy-JQS"/>
-                                <segue destination="cCp-No-sgt" kind="unwind" unwindAction="meViewDidCloseWithSender:" id="KcC-m6-hbA"/>
+                                <action selector="closeButtonDidTapWithSender:" destination="6aX-yo-yRD" id="aeL-y0-GNz"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NEd-OO-mZY" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <exit id="cCp-No-sgt" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="157.59999999999999" y="145.27736131934034"/>
         </scene>
@@ -238,7 +236,7 @@
                     <navigationItem key="navigationItem" id="eDE-RT-93Z">
                         <barButtonItem key="leftBarButtonItem" systemItem="stop" id="c1W-NK-c5h">
                             <connections>
-                                <action selector="cancelButtonDidTapWithSender:" destination="ay9-Nc-21Z" id="Zrk-a2-24o"/>
+                                <action selector="cancelButtonDidTapWithSender:" destination="ay9-Nc-21Z" id="Ahz-bp-8hi"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" style="done" systemItem="done" id="uqK-DO-Ixs">
