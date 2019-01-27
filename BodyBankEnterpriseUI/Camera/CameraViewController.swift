@@ -66,6 +66,7 @@ open class CameraViewController: UIViewController {
     @IBOutlet weak var weightValueLabel: UILabel!
     @IBOutlet weak var weightUnitLabel: UILabel!
     @IBOutlet weak var ageValueLabel: UILabel!
+    @IBOutlet weak var timerButton: UIButton!
 
     let motionManager: CMMotionManager = CMMotionManager()
     var currentAttitude: CMAttitude?
@@ -92,6 +93,11 @@ open class CameraViewController: UIViewController {
         }
     }
     var navigationBarBackgroundImage: UIImage?
+    var timerStarted = false{
+        didSet{
+            timerButton.isEnabled = !timerStarted
+        }
+    }
 
     // MARK: View cycle
     open override func viewDidLoad() {
@@ -167,11 +173,13 @@ open class CameraViewController: UIViewController {
         }
         lockingTouch = true
         stopListeningGyro()
+        timerStarted = false
     }
     
     open override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         cameraLayer.alpha = 0
+        
     }
 
     @IBAction func genderControlValueDidChange(sender: UISegmentedControl){
@@ -467,6 +475,7 @@ open class CameraViewController: UIViewController {
                         return
                     }
                     self.capturing = false
+                    self.timerStarted = false
                     if let orientation = self.previewLayer?.connection?.videoOrientation {
                         if let normalizedImage = image?.normalized(videoOrientation: orientation) {
                             var transformedImage: UIImage? = normalizedImage
@@ -493,6 +502,7 @@ open class CameraViewController: UIViewController {
             }
         }) {[unowned self] in
             self.capturing = false
+            self.timerStarted = false
             Alertift.alert(title: NSLocalizedString("", comment: ""), message: NSLocalizedString("Failed to focus", comment: "")).action(.cancel(NSLocalizedString("OK", comment: ""))).show()
 
         }
@@ -626,6 +636,10 @@ open class CameraViewController: UIViewController {
     }
 
     func startCountDownTimer() {
+        if timerStarted{
+            return
+        }
+        timerStarted = true
         countLabel.isHidden = false
         countLabel.alpha = 0
         UIView.animate(withDuration: 0.5, animations: { [weak self] in
@@ -641,11 +655,7 @@ open class CameraViewController: UIViewController {
         countLabel.text = "\(count)"
         if count == 0 {
             countLabel.isHidden = true
-            if #available(iOS 10.0, *){
-                captureImpl()
-            }else{
-                
-            }
+            captureImpl()
         } else {
             DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] in
                 self?.countDownTimeCount(count: count - 1)
