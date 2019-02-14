@@ -74,7 +74,10 @@ open class EstimationHistoryViewController: UITableViewController {
                 entries.append(ResultEntry(name: "Inseam", value: result.inseamLength ?? 0, unit: lengthUnit))
                 entries.append(ResultEntry(name: "Out seam", value: result.outseamLength ?? 0, unit: lengthUnit))
                 entries.append(ResultEntry(name: "Total Length", value: result.totalLength ?? 0, unit: lengthUnit))
+            }  else {
+                entries.append(ResultEntry(name: "Error", value: request.errorCode ?? "No Error." , unit: nil))
             }
+
             DispatchQueue.main.async{[unowned self] in
                 self.tableView.reloadData()
                 self.pageViewController.reloadData()
@@ -147,8 +150,13 @@ open class EstimationHistoryViewController: UITableViewController {
             cell.name = entry.name
             if let doubleValue = entry.value as? Double{
                 cell.setValueAndUnit(value: doubleValue, unit: entry.unit)
-            }else if let intValue = entry.value as? Int{
+            } else if let intValue = entry.value as? Int{
                 cell.setValueAndUnit(value: intValue, unit: entry.unit)
+            } else if let strValue = entry.value as? String {
+                cell.setValueAndUnit(value: strValue, unit: entry.unit)
+            } else if let genValue = entry.value as? Gender {
+                let genStr = genValue.rawValue
+                cell.setValueAndUnit(value: genStr, unit: entry.unit)
             }
         }
     }
