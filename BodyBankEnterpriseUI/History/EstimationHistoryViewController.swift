@@ -58,6 +58,7 @@ open class EstimationHistoryViewController: UITableViewController {
             entries.append(ResultEntry(name: "Weight", value: request.weight ?? 0, unit: massUnit))
             entries.append(ResultEntry(name: "Age", value: request.age ?? 0, unit: nil))
             entries.append(ResultEntry(name: "Gender", value: request.gender! , unit: nil))
+
             if let result = request.result{
                entries.append(ResultEntry(name: "Neck", value: result.neckCircumference ?? 0, unit: lengthUnit))
                 entries.append(ResultEntry(name: "Shoulder", value: result.shoulderWidth ?? 0, unit: lengthUnit))
@@ -74,8 +75,12 @@ open class EstimationHistoryViewController: UITableViewController {
                 entries.append(ResultEntry(name: "Inseam", value: result.inseamLength ?? 0, unit: lengthUnit))
                 entries.append(ResultEntry(name: "Out seam", value: result.outseamLength ?? 0, unit: lengthUnit))
                 entries.append(ResultEntry(name: "Total Length", value: result.totalLength ?? 0, unit: lengthUnit))
-            }  else {
-                entries.append(ResultEntry(name: "Error", value: request.errorCode ?? "No Error." , unit: nil))
+            } else {
+                if request.status == .failed {
+                  let errorStr = request.errorCode != nil ? request.errorCode! : "UNEXPECTED_ERROR" // For case status is 'failed' but there's no errorCode.
+
+                  entries.append(ResultEntry(name: "Error", value: NSLocalizedString(errorStr, comment: "Error returned from server."), unit: nil))
+                }
             }
 
             DispatchQueue.main.async{[unowned self] in
