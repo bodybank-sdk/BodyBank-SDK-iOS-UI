@@ -13,15 +13,20 @@
         <!--History-->
         <scene sceneID="xeX-Lf-cCy">
             <objects>
-                <tableViewController id="6aX-yo-yRD" customClass="EstimationHistoryListViewController" customModule="BodyBankEnterpriseUI" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="6aX-yo-yRD" customClass="EstimationHistoryListViewController" customModule="BodyBankEnterpriseUI" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="9XC-Qs-Pta">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        <view key="tableHeaderView" contentMode="scaleToFill" id="b5p-Bv-jxW">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </view>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="Cell" rowHeight="91" id="We4-dR-GkV" customClass="EstimationHistoryListCell" customModule="BodyBankEnterpriseUI" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="375" height="91"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="Cell" rowHeight="91" id="We4-dR-GkV" customClass="EstimationHistoryListCell" customModule="BodyBankEnterpriseUI">
+                                <rect key="frame" x="0.0" y="72" width="375" height="91"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="We4-dR-GkV" id="vOW-M8-4pE">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="91"/>
@@ -123,20 +128,19 @@
                     <navigationItem key="navigationItem" title="History" id="nkg-Eu-bVK">
                         <barButtonItem key="leftBarButtonItem" systemItem="stop" id="cgV-AF-PaG">
                             <connections>
-                                <segue destination="cCp-No-sgt" kind="unwind" unwindAction="meViewDidCloseWithSender:" id="KcC-m6-hbA"/>
+                                <action selector="closeButtonDidTapWithSender:" destination="6aX-yo-yRD" id="aeL-y0-GNz"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NEd-OO-mZY" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <exit id="cCp-No-sgt" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="157.59999999999999" y="145.27736131934034"/>
         </scene>
         <!--Estimation History View Controller-->
         <scene sceneID="aLT-HF-yXf">
             <objects>
-                <tableViewController id="ay9-Nc-21Z" customClass="EstimationHistoryViewController" customModule="BodyBankEnterpriseUI" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="ay9-Nc-21Z" customClass="EstimationHistoryViewController" customModule="BodyBankEnterpriseUI" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="1" sectionFooterHeight="1" id="Gsd-rD-Ayh">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -172,7 +176,7 @@
                             </constraints>
                         </view>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="EntryCell" rowHeight="48" id="65O-Zm-AVw" customClass="EstimationHistoryResultEntryCell" customModule="BodyBankEnterpriseUI" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="EntryCell" rowHeight="48" id="65O-Zm-AVw" customClass="EstimationHistoryResultEntryCell" customModule="BodyBankEnterpriseUI">
                                 <rect key="frame" x="0.0" y="301" width="375" height="48"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="65O-Zm-AVw" id="6vg-FK-SEN">
@@ -237,7 +241,7 @@
                     <navigationItem key="navigationItem" id="eDE-RT-93Z">
                         <barButtonItem key="leftBarButtonItem" systemItem="stop" id="c1W-NK-c5h">
                             <connections>
-                                <action selector="cancelButtonDidTapWithSender:" destination="ay9-Nc-21Z" id="Zrk-a2-24o"/>
+                                <action selector="cancelButtonDidTapWithSender:" destination="ay9-Nc-21Z" id="Ahz-bp-8hi"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" style="done" systemItem="done" id="uqK-DO-Ixs">
@@ -293,7 +297,7 @@
         <!--Image Page Item View Controller-->
         <scene sceneID="Vg2-Ru-ETu">
             <objects>
-                <viewController storyboardIdentifier="ImagePageItem" id="1Ab-zz-ZTe" customClass="ImagePageItemViewController" customModule="BodyBankEnterpriseUI" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ImagePageItem" id="1Ab-zz-ZTe" customClass="ImagePageItemViewController" customModule="BodyBankEnterpriseUI" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="lqn-ET-HXL">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

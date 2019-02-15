@@ -29,7 +29,7 @@
         <!--Tutorial View Controller-->
         <scene sceneID="3Ye-Ta-HYp">
             <objects>
-                <viewController id="pXz-p0-PdT" customClass="TutorialViewController" customModule="BodyBankEnterpriseUI" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="pXz-p0-PdT" customClass="TutorialViewController" customModule="BodyBankEnterpriseUI" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="fwz-Ih-QyD">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

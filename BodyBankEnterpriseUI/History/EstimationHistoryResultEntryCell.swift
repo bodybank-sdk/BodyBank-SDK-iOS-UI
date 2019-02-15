@@ -25,4 +25,8 @@ open class EstimationHistoryResultEntryCell: UITableViewCell {
     func setValueAndUnit(value: Int, unit: String?){
         valueLabel.text = String(format: "%d%@", value, unit ?? "")
     }
+  
+    func setValueAndUnit(value: String, unit: String?){
+        valueLabel.text = "\(value)\(unit ?? "")"
+    }
 }

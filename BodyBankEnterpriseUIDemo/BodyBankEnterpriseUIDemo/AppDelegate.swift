@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import BodyBankEnterprise
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -16,6 +17,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        //TODO: Include bodybank-config.json in main bundle
+        //TODO: Replace url / api key / user id
+        let tokenProvider = DirectTokenProvider(apiUrl: "url", apiKey: "api key")
+        tokenProvider.userId = "user id"
+        try! BodyBankEnterprise.initialize(tokenProvider: tokenProvider)
         return true
     }
 

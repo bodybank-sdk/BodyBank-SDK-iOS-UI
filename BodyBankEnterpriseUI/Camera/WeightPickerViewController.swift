@@ -24,8 +24,6 @@ class WeightPickerViewController: BasePickerViewController{
         }
     }
     
-    let units = ["kg", "lbs"]
-    
     var weightInKg: Double{
         get{
             if isPound{
