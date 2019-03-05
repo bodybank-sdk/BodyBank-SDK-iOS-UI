@@ -39,7 +39,6 @@ open class CameraViewController: UIViewController {
             return stillImageOutputImpl as? AVCapturePhotoOutput
         }
     }
-    
     var stillImageOutputV9: AVCaptureStillImageOutput?{
         get{
             return stillImageOutputImpl as? AVCaptureStillImageOutput
@@ -77,7 +76,7 @@ open class CameraViewController: UIViewController {
         didSet {
             if capturingFront {
                 if let bundle = BodyBankEnterprise.CameraUI.bundle{
-                 guideImageView.image = UIImage(named: "front", in: bundle, compatibleWith: nil)
+                    guideImageView.image = UIImage(named: "front", in: bundle, compatibleWith: nil)
                 }
                 frontImageButton.isHidden = true
                 estimationParameter.frontImage = nil
@@ -218,7 +217,6 @@ open class CameraViewController: UIViewController {
         }
     }
     
-    
     // MARK: Initial Methods
     func initializeCapture() {
         previewLayer?.removeFromSuperlayer()
@@ -227,13 +225,18 @@ open class CameraViewController: UIViewController {
         initializeCameraSession(captureDevice?.position != .front)
     }
 
-
     func initializeCameraSession(_ facingBack: Bool) {
         cameraFacingBack = facingBack
         canFocus = facingBack
         // captureSession
         captureSession = AVCaptureSession()
-        captureSession.sessionPreset = .photo
+        // iPhoneバージョンによるサポートする解像度の違い (iPhone S4は切り捨て)
+        // https://stackoverflow.com/questions/19422322/method-to-find-devices-camera-resolution-ios
+        if facingBack {
+            captureSession.sessionPreset = .hd1920x1080
+        } else {
+            captureSession.sessionPreset = .photo
+        }
         let devices = AVCaptureDevice.devices()
         for device in devices {
             if ((device as AnyObject).hasMediaType(.video)) {
@@ -284,12 +287,12 @@ open class CameraViewController: UIViewController {
             }
         }
 
-       let videoOutput = AVCaptureVideoDataOutput()
+        let videoOutput = AVCaptureVideoDataOutput()
+
         if captureSession.canAddOutput(videoOutput) {
             videoOutput.setSampleBufferDelegate(self, queue: DispatchQueue.global())
             captureSession.addOutput(videoOutput)
         }
-
 
         if (captureDevice?.isFlashAvailable == nil) {
         }
@@ -322,7 +325,6 @@ open class CameraViewController: UIViewController {
         }
     }
     
-
     func focusAtPoint(_ atPoint: CGPoint) -> Bool{
         if let device = captureDevice {
             do {
@@ -388,7 +390,7 @@ open class CameraViewController: UIViewController {
     // MARK: Process Methods
     var completionAfterPhotoCapture: ((UIImage?, NSError?) -> Void)?
 
-//    @available(iOS 10.0, *)
+    // @available(iOS 10.0, *)
     func captureImage(_ completion: ((UIImage?, NSError?) -> Void)?) {
 
         if (stillImageOutputImpl == nil) {
@@ -449,26 +451,41 @@ open class CameraViewController: UIViewController {
     }
     
     func focusOnCenterThen(successCallback: (() -> Void)?, errorCallback:(() -> Void)?){
-        if (canFocus && !lockingTouch) {
+        // Front Cameraではフォーカスはできない??のでどちらもFalse
+        print("canFocus: \(canFocus)")
+        print("lockingTouch: \(lockingTouch)")
+
+        // TODO: カメラの初期化処理において Front Camera ではフォーカスできないのかをチェックする必要がある
+        //if(captureDevice?.position == .front) {
+        //     successCallback?()
+        //if (canFocus && !lockingTouch) {
+        if (!lockingTouch) {
             let location = cameraLayer.bounds.center
             self.canFocus = false
             let pointOfInterest = CGPoint(x: location.y / view.bounds.height, y: 1.0 - (location.x / view.bounds.width))
+
             if(self.focusAtPoint(pointOfInterest)){
-               successCallback?()
+                successCallback?()
             }else{
-               errorCallback?()
+                errorCallback?()
             }
-            
         }
+
+        errorCallback?()
     }
 
     func captureImpl() {
+        // TODO: front camのとき、撮影が実行されない
+        print("captureImpl start")
+        print("capturing: \(capturing)")
+
         if capturing {
             return
         }
 
         capturing = true
         focusOnCenterThen(successCallback: {[unowned self] in
+            print("focusOnCenterThen end")
             self.captureImage { [unowned self](image, error) -> Void in
                 if (error == nil && image != nil) {
                     guard let _ = image else {
@@ -515,15 +532,15 @@ open class CameraViewController: UIViewController {
         let perspectiveCorrection = CIFilter(name: "CIPerspectiveCorrection")!
 
         perspectiveCorrection.setValue(CIVector(cgPoint: rect.topLeft),
-                forKey: "inputTopLeft")
+                                       forKey: "inputTopLeft")
         perspectiveCorrection.setValue(CIVector(cgPoint: rect.topRight),
-                forKey: "inputTopRight")
+                                       forKey: "inputTopRight")
         perspectiveCorrection.setValue(CIVector(cgPoint: rect.bottomRight),
-                forKey: "inputBottomRight")
+                                       forKey: "inputBottomRight")
         perspectiveCorrection.setValue(CIVector(cgPoint: rect.bottomLeft),
-                forKey: "inputBottomLeft")
+                                       forKey: "inputBottomLeft")
         perspectiveCorrection.setValue(ciImage,
-                forKey: kCIInputImageKey)
+                                       forKey: kCIInputImageKey)
 
         // Third step: Apply transformation
         let outputImage = perspectiveCorrection.outputImage
@@ -590,22 +607,22 @@ open class CameraViewController: UIViewController {
             sender.isEnabled = false
             var nextFacingBack = captureDevice?.position == .front
             UIView.animate(
-                    withDuration: 0.2,
-                    animations: { () -> Void in
-                        self.cameraLayer.alpha = 0.1
-                    }, completion: {[unowned self] (finished: Bool) -> Void in
+                withDuration: 0.2,
+                animations: { () -> Void in
+                    self.cameraLayer.alpha = 0.1
+            }, completion: {[unowned self] (finished: Bool) -> Void in
                 self.previewLayer?.removeFromSuperlayer()
                 self.stillImageOutputImpl = nil
                 self.captureSession = AVCaptureSession()
                 self.initializeCameraSession(nextFacingBack)
                 UIView.animate(
-                        withDuration: 0.2,
-                        animations: { () -> Void in
-                            self.cameraLayer.alpha = 1
-                        },
-                        completion: { (isFinished: Bool) -> Void in
-                            sender.isEnabled = true
-                        }
+                    withDuration: 0.2,
+                    animations: { () -> Void in
+                        self.cameraLayer.alpha = 1
+                },
+                    completion: { (isFinished: Bool) -> Void in
+                        sender.isEnabled = true
+                }
                 )
             })
         }
@@ -639,6 +656,17 @@ open class CameraViewController: UIViewController {
         if timerStarted{
             return
         }
+
+        // ADD:
+        // parameter condition
+        if !isParameterAllInput {
+            Alertift.alert(title: nil, message: NSLocalizedString("Input height, weight, age and gender.", comment: ""))
+                .action(.default("OK"))
+                .show(on: self, completion: nil)
+            return
+        }
+
+
         timerStarted = true
         countLabel.isHidden = false
         countLabel.alpha = 0
@@ -655,6 +683,17 @@ open class CameraViewController: UIViewController {
         countLabel.text = "\(count)"
         if count == 0 {
             countLabel.isHidden = true
+
+            // ADD:
+            // angle condition
+            if !captureButton.isEnabled {
+                Alertift.alert(title: nil, message: NSLocalizedString("Angle condition is not met. Please fix the angle.", comment: ""))
+                    .action(.default("OK"))
+                    .show(on: self, completion: nil)
+                timerStarted = false
+                return
+            }
+
             captureImpl()
         } else {
             DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] in
@@ -669,9 +708,9 @@ open class CameraViewController: UIViewController {
 
     @IBAction func closeButtonDidTap(sender: Any) {
         Alertift.actionSheet(title: NSLocalizedString("", comment: ""), message: NSLocalizedString("Do you want to discard changes?", comment: "")).action(.cancel(NSLocalizedString("Cancel", comment: "")))
-                .action(.destructive(NSLocalizedString("Discard", comment: ""))) { [weak self] _, _ in
-                    self?.capturingFront = true
-                }.show(on: self, completion: nil)
+            .action(.destructive(NSLocalizedString("Discard", comment: ""))) { [weak self] _, _ in
+                self?.capturingFront = true
+            }.show(on: self, completion: nil)
     }
 
 
@@ -696,7 +735,6 @@ open class CameraViewController: UIViewController {
     }
 
 
-   
 
     func reloadParameters(){
         if estimationParameter.age > 0{
@@ -854,6 +892,10 @@ extension CameraViewController {
             }
         }
         captureButton.isEnabled = capturable
+        // ADD:
+        if !timerStarted {
+            timerButton.isEnabled = capturable
+        }
     }
     
     open func reset(){
