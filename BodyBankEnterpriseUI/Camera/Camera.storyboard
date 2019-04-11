@@ -385,6 +385,7 @@
                         <outlet property="guideImageView" destination="JNO-kL-dZO" id="tIl-Yh-6Da"/>
                         <outlet property="heightUnitLabel" destination="JeZ-xh-3Sn" id="2uU-N9-QIT"/>
                         <outlet property="heightValueLabel" destination="Uc2-FE-wc0" id="bd4-z1-iJU"/>
+                        <outlet property="slideBarView" destination="dAq-z9-hBU" id="k95-Ht-dr1"/>
                         <outlet property="tiltView" destination="EdL-7n-SXT" id="DpM-QM-Nve"/>
                         <outlet property="timerButton" destination="AqN-hA-eN9" id="lUa-PB-Gbw"/>
                         <outlet property="weightUnitLabel" destination="csq-va-sTZ" id="ndw-A2-xc3"/>

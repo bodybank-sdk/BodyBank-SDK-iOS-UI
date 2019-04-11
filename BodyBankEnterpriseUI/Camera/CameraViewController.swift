@@ -66,7 +66,8 @@ open class CameraViewController: UIViewController {
     @IBOutlet weak var weightUnitLabel: UILabel!
     @IBOutlet weak var ageValueLabel: UILabel!
     @IBOutlet weak var timerButton: UIButton!
-
+    @IBOutlet weak var slideBarView: UIView!
+    
     let motionManager: CMMotionManager = CMMotionManager()
     var currentAttitude: CMAttitude?
     var attitudeWhenPhotoCaptured: CMAttitude?
@@ -848,49 +849,48 @@ extension CameraViewController {
     }
 
     func updateGyroIndicator() {
+        guard let gravity = currentGravity else { return } // Handle error!
 
         var capturable = false
-        if let attitude = currentAttitude {
-            let q = attitude.quaternion
-            let qPitch = atan2(2 * (q.x * q.w + q.y * q.z), 1 - 2 * q.x * q.x - 2 * q.z * q.z)
-
-            let diff = Double.pi / 2 - qPitch
-            let scale = Double.pi / 6
-            let scaledDiff = max(-1, min(diff / scale, 1))
-            let translationY = 100 * scaledDiff
-
-            angleView.translatesAutoresizingMaskIntoConstraints = true
-            angleView.center = CGPoint(x: angleView.center.x, y: angleView.center.y + CGFloat(translationY - previousTranslationY))
-            previousTranslationY = translationY
-            if abs(diff) < 3.0 / 180.0 * Double.pi {
-                angleView.backgroundColor = UIColor.BodyBank.Gradient.begin
-                capturable = true
-            } else {
-                angleView.backgroundColor = .white
-                capturable = false
-            }
-
-
+        let slideBarTopY = slideBarView.frame.maxY
+        let slideBarMidY = slideBarView.frame.midY
+        let slideBarHalfHeight = slideBarTopY - slideBarMidY
+        let ballCenterX = angleView.frame.midX
+        let inversedGravityZ = gravity.z * -1
+        
+        // pitchIndicator
+        angleView.center = CGPoint(x: ballCenterX, y: slideBarMidY + slideBarHalfHeight * CGFloat(inversedGravityZ))
+        
+        if fabs(inversedGravityZ * 90) < 3.0 {
+            angleView.backgroundColor = UIColor.BodyBank.Gradient.begin
+            capturable = true
+        } else {
+            angleView.backgroundColor = .white
+            capturable = false
         }
-
-        if let gravity = currentGravity {
-            var angle = CGFloat(atan2(gravity.y, gravity.x))
-            if (angle < 0 && angle > -CGFloat.pi) {
-                angle += CGFloat.pi / 2
-            } else if (angle >= CGFloat.pi / 2 && angle < CGFloat.pi) {
-                angle -= 3 * CGFloat.pi / 2
-            } else {
-                angle += CGFloat.pi / 2
-            }
-            tiltView.transform = CGAffineTransform(rotationAngle: angle)
-            if abs(angle) < CGFloat(3.0 / 180.0 * Double.pi) {
-                capturable = capturable && true
-                tiltView.backgroundColor = UIColor.BodyBank.Gradient.begin
-            } else {
-                capturable = false
-                tiltView.backgroundColor = .white
-            }
+        
+        // tiltIndicator
+        var angle = CGFloat(atan2(gravity.y, gravity.x))
+        
+        if (angle < 0 && angle > -CGFloat.pi) {
+            angle += CGFloat.pi / 2
+        } else if (angle >= CGFloat.pi / 2 && angle < CGFloat.pi) {
+            angle -= 3 * CGFloat.pi / 2
+        } else {
+            angle += CGFloat.pi / 2
         }
+        
+        tiltView.transform = CGAffineTransform(rotationAngle: angle)
+        
+        if abs(angle) < CGFloat(3.0 / 180.0 * Double.pi) {
+            capturable = capturable && true
+            tiltView.backgroundColor = UIColor.BodyBank.Gradient.begin
+        } else {
+            capturable = false
+            tiltView.backgroundColor = .white
+        }
+        
+        // enable capture button
         captureButton.isEnabled = capturable
         // ADD:
         if !timerStarted {
