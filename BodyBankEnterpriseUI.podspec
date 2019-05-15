@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
     s.name = 'BodyBankEnterpriseUI'
     s.summary = 'BodyBank Enterprise iOS UI SDK'
-    s.version = '0.0.33'
+    s.version = '0.0.34'
     s.author = 'Original Inc.'
     s.license = { :type => 'MIT', :file => 'LICENSE' }
 
@@ -29,7 +29,7 @@ Pod::Spec.new do |s|
     s.subspec 'History' do |history|
         history.dependency 'BodyBankEnterprise'
         history.dependency 'SimpleImageViewerNew'
-        history.dependency 'NVActivityIndicatorView'
+        history.dependency 'NVActivityIndicatorView', '4.6.1'
         history.dependency 'Kingfisher', '~> 4.10.1', '< 5.0'
         history.dependency 'Alertift'
         history.dependency 'AFDateHelper'

@@ -32,6 +32,8 @@ open class CameraViewController: UIViewController {
     var captureSession = AVCaptureSession()
     var captureDevice: AVCaptureDevice?
     var stillImageOutputImpl: NSObject?
+  
+    private var _observers = [NSKeyValueObservation]()
     
     @available(iOS 10.0, *)
     var stillImageOutput: AVCapturePhotoOutput?{
@@ -174,6 +176,12 @@ open class CameraViewController: UIViewController {
         lockingTouch = true
         stopListeningGyro()
         timerStarted = false
+      
+        for observer in _observers {
+            observer.invalidate()
+        }
+      
+        _observers.removeAll()
     }
     
     open override func viewDidDisappear(_ animated: Bool) {
@@ -224,6 +232,7 @@ open class CameraViewController: UIViewController {
         stillImageOutputImpl = nil
         captureSession = AVCaptureSession()
         initializeCameraSession(captureDevice?.position != .front)
+        setupFocusObserver()
     }
 
     func initializeCameraSession(_ facingBack: Bool) {
@@ -259,6 +268,19 @@ open class CameraViewController: UIViewController {
             }
 
         }
+    }
+  
+    func setupFocusObserver() {
+      guard let captureDevice = self.captureDevice else { return }
+
+      _observers.append(captureDevice.observe(\.isAdjustingFocus, options: [.old, .new]) { [unowned self] _, change in
+        guard let isAdjusting = change.newValue else { return }
+
+        if !isAdjusting && self.capturing {
+          // capture when auto-focus finished
+          self.captureImage()
+        }
+      })
     }
 
     func setupCamera() {
@@ -312,19 +334,6 @@ open class CameraViewController: UIViewController {
 
     // MARK: Touch to forcus
     var canFocus: Bool = true
-
-    open override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-
-        if (canFocus && !lockingTouch) {
-            if let anyTouch: AnyObject = touches.first {
-                let location = anyTouch.location(in: self.view)
-                canFocus = false
-                let pointOfInterest = CGPoint(x: location.y / view.bounds.height, y: 1.0 - (location.x / view.bounds.width))
-                focusAtPoint(pointOfInterest)
-            }
-
-        }
-    }
     
     func focusAtPoint(_ atPoint: CGPoint) -> Bool{
         if let device = captureDevice {
@@ -392,16 +401,13 @@ open class CameraViewController: UIViewController {
     var completionAfterPhotoCapture: ((UIImage?, NSError?) -> Void)?
 
     // @available(iOS 10.0, *)
-    func captureImage(_ completion: ((UIImage?, NSError?) -> Void)?) {
-
+    func captureImage() {
         if (stillImageOutputImpl == nil) {
             return
         }
         var sessionQueue: DispatchQueue!
         sessionQueue = DispatchQueue(label: "Capture Session", attributes: [])
         sessionQueue.async(execute: {
-            //                    self.captureDevice?.lockForConfiguration(nil)
-
             do {
                 try self.captureDevice?.lockForConfiguration()
             } catch {
@@ -413,23 +419,56 @@ open class CameraViewController: UIViewController {
                 settingsForMonitoring.flashMode = .auto
                 settingsForMonitoring.isAutoStillImageStabilizationEnabled = true
                 settingsForMonitoring.isHighResolutionPhotoEnabled = false
-                self.completionAfterPhotoCapture = completion
+                self.completionAfterPhotoCapture = self.optimizeAndSetImage2EstimationParams
                 self.stillImageOutput!.capturePhoto(with: settingsForMonitoring, delegate: self)
             }else{
                 self.stillImageOutputV9!.captureStillImageAsynchronously(
                     from: self.stillImageOutputV9!.connection(with: .video)!,
                     completionHandler: {(imageDataSampleBuffer: CMSampleBuffer?, error: Error?) -> Void in
                         if (imageDataSampleBuffer == nil || error != nil) {
-                            completion?(nil, nil)
+                            self.optimizeAndSetImage2EstimationParams(nil, nil)
                         } else if imageDataSampleBuffer != nil {
                             let imageData: Data = AVCaptureStillImageOutput.jpegStillImageNSDataRepresentation(imageDataSampleBuffer!)!
                             let image = UIImage(data: imageData)
-                            completion?(image, nil)
+                            self.optimizeAndSetImage2EstimationParams(image, nil)
                         }
                 })
             }
             self.captureDevice?.unlockForConfiguration()
         })
+    }
+  
+    func optimizeAndSetImage2EstimationParams(_ image: UIImage?, _ error: NSError?) -> Void {
+      if (error == nil && image != nil) {
+        guard let _ = image else {
+            return
+        }
+        self.capturing = false
+        self.timerStarted = false
+
+        if let orientation = self.previewLayer?.connection?.videoOrientation {
+          if let normalizedImage = image?.normalized(videoOrientation: orientation) {
+            var transformedImage: UIImage? = normalizedImage
+            if let attitude = self.attitudeWhenPhotoCaptured {
+              transformedImage = self.transformedImage(image: normalizedImage, withAttitude: attitude)
+            }
+            if let transformedImage = transformedImage {
+              UIImageWriteToSavedPhotosAlbum(transformedImage, nil, nil, nil)
+              var targetImage: UIImage? = transformedImage
+              if self.shouldBlurFace{
+                targetImage = BlurFace(image: transformedImage).blurFaces(centerOffset: self.capturingFront == true ? .zero : CGPoint(x: -transformedImage.size.width / 20, y: 0)) ?? transformedImage
+              }
+              if let _ = self.estimationParameter.frontImage {
+                self.estimationParameter.sideImage = targetImage
+                self.delegate?.cameraViewControllerDidFinish(viewController: self)
+              } else {
+                self.estimationParameter.frontImage = targetImage
+                self.capturingFront = false
+              }
+            }
+          }
+        }
+      }
     }
 
     @IBAction func captureButtonDidTap(_ sender: UIButton) {
@@ -443,7 +482,7 @@ open class CameraViewController: UIViewController {
             })
         } else {
             if isParameterAllInput{
-                captureImpl()
+                startCapturing()
             }else{
                 Alertift.alert(title: nil, message: NSLocalizedString("Input height, weight, age and gender.", comment: "")).action(.default("OK")).show(on: self, completion: nil)
             }
@@ -451,8 +490,8 @@ open class CameraViewController: UIViewController {
         
     }
     
-    func focusOnCenterThen(successCallback: (() -> Void)?, errorCallback:(() -> Void)?){
-        // Front Cameraではフォーカスはできない??のでどちらもFalse
+    func focusOnCenter(errorCallback:(() -> Void)?) {
+        // Front Cameraではフォーカスはできない
         print("canFocus: \(canFocus)")
         print("lockingTouch: \(lockingTouch)")
 
@@ -460,71 +499,44 @@ open class CameraViewController: UIViewController {
         //if(captureDevice?.position == .front) {
         //     successCallback?()
         //if (canFocus && !lockingTouch) {
+
         if (!lockingTouch) {
             let location = cameraLayer.bounds.center
             self.canFocus = false
             let pointOfInterest = CGPoint(x: location.y / view.bounds.height, y: 1.0 - (location.x / view.bounds.width))
+            let focused = self.focusAtPoint(pointOfInterest)
 
-            if(self.focusAtPoint(pointOfInterest)){
-                successCallback?()
-            }else{
+            if (!focused){
                 errorCallback?()
             }
+          
+            return
         }
 
         errorCallback?()
     }
 
-    func captureImpl() {
-        // TODO: front camのとき、撮影が実行されない
-        print("captureImpl start")
-        print("capturing: \(capturing)")
-
+    func startCapturing() {
         if capturing {
             return
         }
 
         capturing = true
-        focusOnCenterThen(successCallback: {[unowned self] in
-            print("focusOnCenterThen end")
-            self.captureImage { [unowned self](image, error) -> Void in
-                if (error == nil && image != nil) {
-                    guard let _ = image else {
-                        return
-                    }
-                    self.capturing = false
-                    self.timerStarted = false
-                    if let orientation = self.previewLayer?.connection?.videoOrientation {
-                        if let normalizedImage = image?.normalized(videoOrientation: orientation) {
-                            var transformedImage: UIImage? = normalizedImage
-                            if let attitude = self.attitudeWhenPhotoCaptured {
-                                transformedImage = self.transformedImage(image: normalizedImage, withAttitude: attitude)
-                            }
-                            if let transformedImage = transformedImage{
-                                UIImageWriteToSavedPhotosAlbum(transformedImage, nil, nil, nil)
-                                var targetImage: UIImage? = transformedImage
-                                if self.shouldBlurFace{
-                                    targetImage = BlurFace(image: transformedImage).blurFaces(centerOffset: self.capturingFront == true ? .zero : CGPoint(x: -transformedImage.size.width / 20, y: 0)) ?? transformedImage
-                                }
-                                if let _ = self.estimationParameter.frontImage {
-                                    self.estimationParameter.sideImage = targetImage
-                                    self.delegate?.cameraViewControllerDidFinish(viewController: self)
-                                } else {
-                                    self.estimationParameter.frontImage = targetImage
-                                    self.capturingFront = false
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }) {[unowned self] in
+
+        // フロントカメラではフォーカスできないため、この時点で撮影を発火する
+        if (!cameraFacingBack) {
+          self.captureImage()
+
+          return
+        }
+
+        self.focusOnCenter() { [unowned self] in
             self.capturing = false
             self.timerStarted = false
             Alertift.alert(title: NSLocalizedString("", comment: ""), message: NSLocalizedString("Failed to focus", comment: "")).action(.cancel(NSLocalizedString("OK", comment: ""))).show()
-
+          
+            return
         }
-
     }
     
     func transformedImage(image: UIImage, withAttitude attitude: CMAttitude) -> UIImage? {
@@ -675,9 +687,13 @@ open class CameraViewController: UIViewController {
             self?.countLabel.alpha = 1
         }) { [weak self] finished in
             if finished {
-                self?.startCapturingTimer()
+                self?.startCaptureTimer()
             }
         }
+    }
+  
+    func startCaptureTimer() {
+        countDownTimeCount(count: 10)
     }
 
     func countDownTimeCount(count: Int) {
@@ -695,16 +711,12 @@ open class CameraViewController: UIViewController {
                 return
             }
 
-            captureImpl()
+            startCapturing()
         } else {
             DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] in
                 self?.countDownTimeCount(count: count - 1)
             }
         }
-    }
-
-    func startCapturingTimer() {
-        countDownTimeCount(count: 10)
     }
 
     @IBAction func closeButtonDidTap(sender: Any) {
