@@ -100,6 +100,10 @@ open class CameraViewController: UIViewController {
             timerButton.isEnabled = !timerStarted
         }
     }
+  
+    var carouselModal: CustomCarouselModal?
+    var modalImages: [UIImage]?
+    var modalDescriptions: [String]?
 
     // MARK: View cycle
     open override func viewDidLoad() {
@@ -107,6 +111,21 @@ open class CameraViewController: UIViewController {
         frontImageButton.imageView?.contentMode = .scaleAspectFill
         reloadParameters()
         title = NSLocalizedString("Stand inside the outline", comment: "")
+      
+        self.modalImages = [UIImage(named: "hint-image-1")!, UIImage(named: "hint-image-2")!, UIImage(named: "hint-image-3")!, UIImage(named: "hint-image-4")!]
+        self.modalDescriptions = [
+          "頭頂と足先は、\n枠線の高さにあわせてください。",
+          "腕や股下、体の幅などは\n多少枠線からはみ出てもOK！",
+          "スマートフォンの傾きを調整し\n水平になると撮影できます。",
+          "被写体から２〜３メートル離れ\nしゃがんで撮影すると安定します。"
+        ]
+      
+        do {
+          self.carouselModal = try CustomCarouselModal(title: "撮影のヒント", images: modalImages!, descriptions: modalDescriptions!)
+          self.carouselModal?.show(self)
+        } catch {
+          print(error)
+        }
     }
     
     open override func viewDidLayoutSubviews() {
@@ -226,6 +245,10 @@ open class CameraViewController: UIViewController {
         }
     }
     
+    @IBAction func helpButtonTapped(_ sender: Any) {
+        carouselModal?.show(self)
+    }
+
     // MARK: Initial Methods
     func initializeCapture() {
         previewLayer?.removeFromSuperlayer()
