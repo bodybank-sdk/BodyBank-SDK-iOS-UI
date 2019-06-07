@@ -112,7 +112,13 @@ open class CameraViewController: UIViewController {
         reloadParameters()
         title = NSLocalizedString("Stand inside the outline", comment: "")
       
-        self.modalImages = [UIImage(named: "hint-image-1")!, UIImage(named: "hint-image-2")!, UIImage(named: "hint-image-3")!, UIImage(named: "hint-image-4")!]
+        if let bundle = BodyBankEnterprise.CameraUI.bundle{
+            self.modalImages = [UIImage(named: "hint-image-1", in: bundle, compatibleWith: nil)!,
+                                UIImage(named: "hint-image-2", in: bundle, compatibleWith: nil)!,
+                                UIImage(named: "hint-image-3", in: bundle, compatibleWith: nil)!,
+                                UIImage(named: "hint-image-4", in: bundle, compatibleWith: nil)!]
+
+        }
         self.modalDescriptions = [
           "頭頂と足先は、\n枠線の高さにあわせてください。",
           "腕や股下、体の幅などは\n多少枠線からはみ出てもOK！",
