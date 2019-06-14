@@ -76,6 +76,8 @@ open class EstimationHistoryViewController: UITableViewController {
                 entries.append(ResultEntry(name: "Inseam", value: result.inseamLength ?? 0, unit: lengthUnit))
                 entries.append(ResultEntry(name: "Out seam", value: result.outseamLength ?? 0, unit: lengthUnit))
                 entries.append(ResultEntry(name: "Total Length", value: result.totalLength ?? 0, unit: lengthUnit))
+                entries.append(ResultEntry(name: "Under Bust", value: result.underBust ?? 0, unit: lengthUnit))
+                entries.append(ResultEntry(name: "Back Length", value: result.backLength ?? 0, unit: lengthUnit))
             } else {
                 if request.status == .failed {
                   let errorStr = request.errorCode != nil ? request.errorCode! : "UNEXPECTED_ERROR" // For case status is 'failed' but there's no errorCode.
