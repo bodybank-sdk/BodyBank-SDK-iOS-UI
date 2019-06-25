@@ -18,7 +18,7 @@ open class EstimationHistoryListCell: UITableViewCell {
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var activityIndicatorView: NVActivityIndicatorView!
     @IBOutlet weak var statusLabel: UILabel!
-
+    
     open var request: EstimationRequest? {
         didSet {
             self.dateLabel.text = request?.createdAt?.toString(format: .custom("yyyy-MM-dd HH:mm:ss"))
@@ -27,17 +27,20 @@ open class EstimationHistoryListCell: UITableViewCell {
             }else{
                 loading = true
                 DispatchQueue.main.async{
-                    self.resultImageView.kf.setImage(with: self.request?.frontImageThumb?.downloadableURL, placeholder: nil, options: nil, progressBlock: nil) {[unowned self] (image, error, cacheType, url) in
-                        self.request?.frontImageThumb?.cachedImage = image
-                        self.loading = false
+                    self.resultImageView.kf.setImage(with: self.request?.frontImageThumb?.downloadableURL,
+                                                     placeholder: nil,
+                                                     options: nil,
+                                                     progressBlock: nil) {[unowned self] (image, error, cacheType, url) in
+                                                        self.request?.frontImageThumb?.cachedImage = image
+                                                        self.loading = false
                     }
                 }
             }
             self.statusLabel.text = request?.status?.rawValue
         }
     }
-
-
+    
+    
     var loading = false {
         didSet {
             DispatchQueue.main.async { [weak self] in
@@ -47,7 +50,7 @@ open class EstimationHistoryListCell: UITableViewCell {
                     self?.activityIndicatorView.stopAnimating()
                 }
             }
-
+            
         }
     }
 }

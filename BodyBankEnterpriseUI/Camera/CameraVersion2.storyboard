@@ -200,10 +200,10 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="30d-JD-KO9" userLabel="inputview">
-                                <rect key="frame" x="10" y="74" width="110" height="300"/>
+                                <rect key="frame" x="10" y="74" width="110" height="220"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="Lhm-Ck-2Ay">
-                                        <rect key="frame" x="10" y="10" width="90" height="239.5"/>
+                                        <rect key="frame" x="10" y="10" width="90" height="187"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Height" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yjR-TX-ilO">
                                                 <rect key="frame" x="0.0" y="0.0" width="90" height="13.5"/>
@@ -325,30 +325,6 @@
                                                     <action selector="genderControlValueDidChangeWithSender:" destination="kRG-2n-lZQ" eventType="valueChanged" id="k2i-eB-z9G"/>
                                                 </connections>
                                             </segmentedControl>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Type" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Frx-en-gbu">
-                                                <rect key="frame" x="0.0" y="189" width="90" height="14.5"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fOJ-Kj-qZa">
-                                                <rect key="frame" x="0.0" y="205.5" width="90" height="34"/>
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <state key="normal" title="F">
-                                                    <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                </state>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                                        <real key="value" value="1"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                        <real key="value" value="2"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                </userDefinedRuntimeAttributes>
-                                                <connections>
-                                                    <action selector="typeButtonDidTap:" destination="kRG-2n-lZQ" eventType="touchUpInside" id="0fm-l4-aWb"/>
-                                                </connections>
-                                            </button>
                                         </subviews>
                                         <viewLayoutGuide key="safeArea" id="LAs-Ml-wy0"/>
                                     </stackView>
@@ -357,7 +333,7 @@
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="Lhm-Ck-2Ay" secondAttribute="trailing" constant="10" id="Hfw-qW-Vfx"/>
                                     <constraint firstItem="Lhm-Ck-2Ay" firstAttribute="top" secondItem="30d-JD-KO9" secondAttribute="top" constant="10" id="Nf1-2b-bjN"/>
-                                    <constraint firstAttribute="height" constant="300" id="NkQ-4z-D5i"/>
+                                    <constraint firstAttribute="height" constant="220" id="NkQ-4z-D5i"/>
                                     <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="Lhm-Ck-2Ay" secondAttribute="bottom" constant="10" id="TlB-1R-pdP"/>
                                     <constraint firstAttribute="width" constant="110" id="Z5g-g0-2S5"/>
                                     <constraint firstItem="Lhm-Ck-2Ay" firstAttribute="leading" secondItem="30d-JD-KO9" secondAttribute="leading" constant="10" id="y4T-ZG-aSN"/>

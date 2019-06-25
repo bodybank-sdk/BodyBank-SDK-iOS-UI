@@ -9,7 +9,7 @@
 import BodyBankEnterprise
 import UIKit
 
-public extension BodyBankEnterprise{
+public extension BodyBankEnterprise {
     public class HistoryUI{
         static var bundle: Bundle?{
             get{
