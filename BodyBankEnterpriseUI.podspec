@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
     s.name = 'BodyBankEnterpriseUI'
     s.summary = 'BodyBank Enterprise iOS UI SDK'
-    s.version = '0.0.36'
+    s.version = '0.0.37'
     s.author = 'Original Inc.'
     s.license = { :type => 'MIT', :file => 'LICENSE' }
 
@@ -18,7 +18,8 @@ Pod::Spec.new do |s|
         camera.dependency 'SimpleImageViewerNew'
         camera.dependency 'SwiftSpinner'
         camera.dependency 'Alertift'
-        camera.source_files = 'BodyBankEnterpriseUI/Camera/*.swift', 'BodyBankEnterpriseUI/Misc/*.swift'
+        camera.source_files = 'BodyBankEnterpriseUI/Camera/**/*.swift',
+  'BodyBankEnterpriseUI/Misc/*.swift'
         camera.resource_bundle = {
             'BodyBankEnterpriseUI-Camera' => [
             'BodyBankEnterpriseUI/Camera/*.storyboard',
