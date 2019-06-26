@@ -352,18 +352,29 @@ open class CameraVersion2ViewController: UIViewController {
     }
     
     @IBAction func debugPictureUpload(_ sender: Any) {
-        setupEstimationParameter()
+        let _ = setupEstimationParameter()
         delegate?.cameraViewControllerDidFinishDebug(viewController: self)
 
     }
     
     @IBAction func typeButtonDidTap(_ sender: Any) {
+        guard let btn = sender as? UIButton else { return }
+        
+        switch btn.titleLabel?.text {
+            // ラベルを設定する
+            
+        case "Human":
+            btn.setTitle("Mannequin", for: .normal)
+            estimationParameter.race = .Mannequin
+        default:
+            btn.setTitle("Human", for: .normal)
+            estimationParameter.race = .Human
+        }
     }
     
     
     
-    
-    // MARK: Initial Methods
+    // MARK: - Initial Methods
     func initializeCapture() {
         previewLayer?.removeFromSuperlayer()
         stillImageOutputImpl = nil
@@ -663,9 +674,11 @@ extension CameraVersion2ViewController {
         
         if fabs(inversedGravityZ * 90) < 3.0 {
             angleView.backgroundColor = UIColor.BodyBank.Gradient.begin
+            slideBarView.backgroundColor = UIColor.BodyBank.Gradient.begin
             capturable = true
         } else {
             angleView.backgroundColor = .white
+            slideBarView.backgroundColor = .white
             capturable = false
         }
         
