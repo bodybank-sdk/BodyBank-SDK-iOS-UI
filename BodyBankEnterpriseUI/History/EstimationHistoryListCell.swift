@@ -30,7 +30,8 @@ open class EstimationHistoryListCell: UITableViewCell {
                     self.resultImageView.kf.setImage(with: self.request?.frontImageThumb?.downloadableURL,
                                                      placeholder: nil,
                                                      options: nil,
-                                                     progressBlock: nil) {[unowned self] (image, error, cacheType, url) in
+                                                     progressBlock: nil) {[weak self] (image, error, cacheType, url) in
+                                                        guard let self = self else { return }
                                                         self.request?.frontImageThumb?.cachedImage = image
                                                         self.loading = false
                     }

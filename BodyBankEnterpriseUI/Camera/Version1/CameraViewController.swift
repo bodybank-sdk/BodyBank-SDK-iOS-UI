@@ -18,7 +18,6 @@ import SwiftSpinner
 import Alertift
 import BodyBankEnterprise
 import SimpleImageViewerNew
-import Reachability
 
 public protocol CameraViewControllerDelegate: class{
     func cameraViewControllerDidCancel(viewController: CameraViewController)
@@ -45,12 +44,6 @@ open class CameraViewController: UIViewController {
     @IBOutlet weak var weightUnitLabel: UILabel!   // kg
     @IBOutlet weak var ageValueLabel: UILabel!     // 30
     
-    // NewView
-    @IBOutlet weak var heightTextField: UITextField!        // 160
-    @IBOutlet weak var heightLabel: UILabel!                // cm
-    @IBOutlet weak var weightTextField: UITextField!        // 54
-    @IBOutlet weak var weightLabel: UILabel!                // kg
-    @IBOutlet weak var ageTextField: UITextField!           // 30
     @IBOutlet weak var genderSegmented: UISegmentedControl!
     @IBOutlet weak var warningLabel: UILabel!
     
@@ -61,7 +54,7 @@ open class CameraViewController: UIViewController {
     
     
     open weak var delegate: CameraViewControllerDelegate?
-    open var shouldBlurFace = true
+    open var shouldBlurFace = false
     
     open var estimationParameter = EstimationParameter()
     
@@ -133,34 +126,16 @@ open class CameraViewController: UIViewController {
         }
     }
     
-    let reachability = Reachability()!
-    
-    
-    
     // MARK: View cycle
     open override func viewDidLoad() {
         super.viewDidLoad()
         frontImageButton.imageView?.contentMode = .scaleAspectFill
         reloadParameters()
         
-        statusInit()
-        statusLoad()
-        
         title = NSLocalizedString("Stand inside the outline", comment: "")
-        
-        createToolber()
     }
     
     open override func viewWillAppear(_ animated: Bool) {
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(reachabilityChanged(note:)),
-                                               name: .reachabilityChanged,
-                                               object: reachability)
-        do {
-            try reachability.startNotifier()
-        }catch{
-            print("could not start reachability notifier")
-        }
     }
     
     open override func viewDidLayoutSubviews() {
@@ -173,10 +148,10 @@ open class CameraViewController: UIViewController {
         SwiftSpinner.show(NSLocalizedString("Please Wait...", comment: ""))
         showingLoading = true
         
-        PermissionUtil.checkPhotoLibraryPermission(self, callback: { [weak self] (dialogShown) in
+        PermissionUtil.checkPhotoLibraryPermission(self, callback: { [unowned self] (dialogShown) in
             PermissionUtil.checkCameraPermission(self, callback: { (dialogShown) in
-                self?.initializeCapture()
-                self?.setupAfterViewAppear()
+                self.initializeCapture()
+                self.setupAfterViewAppear()
             })
         })
         startListeningGyro()
@@ -428,7 +403,6 @@ open class CameraViewController: UIViewController {
             if let _ = estimationParameter.frontImage {
                 estimationParameter.sideImage = targetImage
                 
-                statusSave()
                 delegate?.cameraViewControllerDidFinish(viewController: self)
             } else {
                 self.estimationParameter.frontImage = targetImage
@@ -457,7 +431,7 @@ open class CameraViewController: UIViewController {
             return
         }
         
-        if !setupEstimationParameter() {
+        if isParameterAllInput {
             Alertift
                 .alert(title: nil,
                        message: NSLocalizedString("Input height, weight, age and gender.", comment: ""))
@@ -663,7 +637,7 @@ open class CameraViewController: UIViewController {
     func startCountDownTimer() {
         if timerStarted { return }
         
-        if !setupEstimationParameter() {
+        if isParameterAllInput {
             Alertift.alert(title: nil, message: NSLocalizedString("Input height, weight, age and gender.", comment: ""))
                 .action(.default("OK"))
                 .show(on: self, completion: nil)
@@ -724,7 +698,7 @@ open class CameraViewController: UIViewController {
     
     
     @IBAction func importPhotoButtonDidTap(sender: Any) {
-        if setupEstimationParameter() {
+        if isParameterAllInput {
             let imagePicker = UIImagePickerController()
             imagePicker.sourceType = .photoLibrary
             imagePicker.mediaTypes = [kUTTypeImage as String]
@@ -783,7 +757,6 @@ extension CameraViewController: UIImagePickerControllerDelegate, UINavigationCon
                 if let _ = self.estimationParameter.frontImage {
                     self.estimationParameter.sideImage = targetImage
                     
-                    self.statusSave()
                     self.delegate?.cameraViewControllerDidFinish(viewController: self)
                 } else {
                     self.estimationParameter.frontImage = targetImage
@@ -911,24 +884,6 @@ extension CameraViewController {
         capturingFront = true
         estimationParameter.clear()
         reloadParameters()
-    }
-}
-
-// MARK: - Reachability
-extension CameraViewController {
-    
-    @objc func reachabilityChanged(note: Notification) {
-        
-        let reachability = note.object as! Reachability
-        
-        switch reachability.connection {
-        case .wifi:
-            warningLabel.isHidden = true
-        case .cellular:
-            warningLabel.isHidden = true
-        case .none:
-            warningLabel.isHidden = false
-        }
     }
 }
 

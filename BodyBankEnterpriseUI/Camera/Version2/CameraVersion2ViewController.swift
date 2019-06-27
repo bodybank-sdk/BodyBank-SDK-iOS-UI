@@ -59,7 +59,7 @@ open class CameraVersion2ViewController: UIViewController {
     
     
     open weak var delegate: CameraVersion2ViewControllerDelegate?
-    open var shouldBlurFace = true
+    open var shouldBlurFace = false
     
     open var estimationParameter = EstimationParameter()
     
@@ -292,7 +292,8 @@ open class CameraVersion2ViewController: UIViewController {
             withDuration: 0.2,
             animations: { () -> Void in
                 self.cameraLayer.alpha = 0.1
-        }, completion: {[unowned self] (finished: Bool) -> Void in
+        }, completion: {[weak self] (finished: Bool) -> Void in
+            guard let self = self else { return }
             self.previewLayer?.removeFromSuperlayer()
             self.stillImageOutputImpl = nil
             self.captureSession = AVCaptureSession()
@@ -412,7 +413,8 @@ open class CameraVersion2ViewController: UIViewController {
     func setupFocusObserver() {
         guard let captureDevice = self.captureDevice else { return }
         
-        _observers.append(captureDevice.observe(\.isAdjustingFocus, options: [.old, .new]) { [unowned self] _, change in
+        _observers.append(captureDevice.observe(\.isAdjustingFocus, options: [.old, .new]) { [weak self] _, change in
+            guard let self = self else { return }
             guard let isAdjusting = change.newValue else { return }
             
             if !isAdjusting && self.capturing {
@@ -602,7 +604,8 @@ extension CameraVersion2ViewController: UIImagePickerControllerDelegate, UINavig
     
     open func imagePickerController(_ picker: UIImagePickerController,
                                     didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
-        picker.dismiss(animated: true, completion: { [unowned self] () -> Void in
+        picker.dismiss(animated: true, completion: { [weak self] () -> Void in
+            guard let self = self else { return }
             var data: Data!
             if #available(iOS 11.0, *){
                 data = try! Data(contentsOf: info[.imageURL] as! URL)

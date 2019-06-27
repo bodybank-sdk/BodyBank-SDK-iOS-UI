@@ -24,7 +24,8 @@ public extension CameraVersion2ViewController{
             return
         }
         
-        focusOnCenter() { [unowned self] in
+        focusOnCenter() { [weak self] in
+            guard let self = self else { return }
             self.capturing = false
             self.timerStarted = false
             Alertift

@@ -43,11 +43,13 @@ open class EstimationHistoryImagesCell: UITableViewCell {
                 self.frontImageView.image = image
             }else{
                 frontActivityIndicatorView.startAnimating()
-                DispatchQueue.global().async{[unowned self] in
+                DispatchQueue.global().async{[weak self] in
+                    guard let self = self else { return }
                     self.frontImageView.kf.setImage(with: self.request?.frontImage?.downloadableURL,
                                                     placeholder: nil,
                                                     options: nil,
-                                                    progressBlock: nil) {[unowned self] (image, error, cacheType, url) in
+                                                    progressBlock: nil) {[weak self] (image, error, cacheType, url) in
+                                                        guard let self = self else { return }
                                                         self.request?.frontImage?.cachedImage = image
                                                         self.frontActivityIndicatorView.stopAnimating()
                     }
@@ -58,11 +60,13 @@ open class EstimationHistoryImagesCell: UITableViewCell {
                 self.sideImageView.image = image
             }else{
                 sideActivityIndicatorView.startAnimating()
-                DispatchQueue.global().async{[unowned self] in
+                DispatchQueue.global().async{[weak self] in
+                    guard let self = self else { return }
                     self.sideImageView.kf.setImage(with: self.request?.sideImage?.downloadableURL,
                                                    placeholder: nil,
                                                    options: nil,
-                                                   progressBlock: nil){[unowned self] (image, error, cacheType, url) in
+                                                   progressBlock: nil){[weak self] (image, error, cacheType, url) in
+                                                    guard let self = self else { return }
                                                     self.request?.sideImage?.cachedImage = image
                                                     self.sideActivityIndicatorView.stopAnimating()
                     }

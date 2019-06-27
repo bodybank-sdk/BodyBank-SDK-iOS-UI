@@ -66,8 +66,9 @@ open class EstimationHistoryListViewController: UITableViewController {
         BodyBankEnterprise
             .listEstimationRequests(limit: limit,
                                     nextToken: token,
-                                    callback: {[unowned self] (requests, nextToken, errors) in
+                                    callback: {[weak self] (requests, nextToken, errors) in
                                         
+                                        guard let self = self else { return }
                                         if let errors = errors{
                                             self.loading = false
                                             Alertift
@@ -146,7 +147,8 @@ open class EstimationHistoryListViewController: UITableViewController {
             }
             if !id.isEmpty{
                 if let vc = segue.destination as? EstimationHistoryViewController {
-                    BodyBankEnterprise.getEstimationRequest(id: id, callback: {[unowned self] (detailedRequest, errors) in
+                    BodyBankEnterprise.getEstimationRequest(id: id, callback: {[weak self] (detailedRequest, errors) in
+                        guard let self = self else { return }
                         if let errors = errors{
                             Alertift.alert(title: nil, message: errors.map({ (error) -> String in
                                 error.localizedDescription
