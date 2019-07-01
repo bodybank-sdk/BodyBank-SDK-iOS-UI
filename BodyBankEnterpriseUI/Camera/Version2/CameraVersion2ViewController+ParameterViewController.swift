@@ -20,7 +20,9 @@ public extension CameraVersion2ViewController{
         }
         
         // age
-        estimationParameter.age = Int(ageTextField.text ?? "-1") ?? -1
+        let age = Int(ageTextField.text ?? "-1") ?? -1
+        if age < 0 { return false }
+        estimationParameter.age = age
         
         // height
         let height:Double = Double(heightTextField.text ?? "-1") ?? -1

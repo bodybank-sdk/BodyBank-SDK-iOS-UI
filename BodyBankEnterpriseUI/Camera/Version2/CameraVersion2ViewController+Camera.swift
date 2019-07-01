@@ -12,6 +12,51 @@ import Alertift
 
 public extension CameraVersion2ViewController{
     
+    // MARK: - Initial Methods
+    func initializeCapture() {
+        previewLayer?.removeFromSuperlayer()
+        stillImageOutputImpl = nil
+        captureSession = AVCaptureSession()
+        initializeCameraSession(captureDevice?.position != .front)
+        setupFocusObserver()
+    }
+    
+    
+    /// Camera Initialize
+    /// カメラの初期化を行う
+    /// - Parameter facingBack: false=frontCamera,true=backCamera
+    func initializeCameraSession(_ facingBack: Bool) {
+        cameraFacingBack = facingBack
+        canFocus = facingBack
+        captureSession = AVCaptureSession()
+        // iPhoneバージョンによるサポートする解像度の違い (iPhone S4は切り捨て)
+        // https://stackoverflow.com/questions/19422322/method-to-find-devices-camera-resolution-ios
+        if facingBack {
+            captureSession.sessionPreset = .hd1920x1080
+        } else {
+            captureSession.sessionPreset = .photo
+        }
+        
+        
+        if facingBack {
+            captureDevice = AVCaptureDevice.default(.builtInWideAngleCamera,
+                                                    for: .video,
+                                                    position: .back)
+        } else {
+            captureDevice = AVCaptureDevice.default(.builtInWideAngleCamera,
+                                                    for: .video,
+                                                    position: .front)
+        }
+        
+        captureDevice?.isVideoHDREnabled = false
+        
+        setupCamera()
+    }
+    
+
+
+    /// カメラの撮影を行う
+    /// startCaputuring
     func startCapturing() {
         
         if capturing { return }
@@ -24,6 +69,7 @@ public extension CameraVersion2ViewController{
             return
         }
         
+        // Foce Error happen
         focusOnCenter() { [weak self] in
             guard let self = self else { return }
             self.capturing = false
@@ -76,39 +122,46 @@ public extension CameraVersion2ViewController{
     }
     
     func focusOnCenter(errorCallback:(() -> Void)?) {
+        
         // Front Cameraではフォーカスはできない
         print("canFocus: \(canFocus)")
+        
         print("lockingTouch: \(lockingTouch)")
         
         // TODO: カメラの初期化処理において Front Camera ではフォーカスできないのかをチェックする必要がある
-        //if(captureDevice?.position == .front) {
-        //     successCallback?()
-        //if (canFocus && !lockingTouch) {
         
-        if !lockingTouch {
-            let location = cameraLayer.bounds.center
-            self.canFocus = false
-            let pointOfInterest = CGPoint(x: location.y / view.bounds.height, y: 1.0 - (location.x / view.bounds.width))
-            let focused = self.focusAtPoint(pointOfInterest)
-            
-            if (!focused){
-                errorCallback?()
-            }
-            
+        if lockingTouch {
+            errorCallback?()
             return
         }
+
+        let location = cameraLayer.bounds.center
+        self.canFocus = false
+        let pointOfInterest = CGPoint(x: location.y / view.bounds.height, y: 1.0 - (location.x / view.bounds.width))
+        let focused = self.focusAtPoint(pointOfInterest)
         
-        errorCallback?()
+        if !focused {
+            errorCallback?()
+        }
+        
+    
     }
     
     // MARK: Touch to forcus
     
+    
+    /// Catch the isAdjusting Focus with KVO after doing the focus. Shoot the camera
+    /// フォーカスを行なった後にKVOでisAdjustingFocusをキャッチして、カメラの撮影を行う
+    /// - Parameter atPoint: <#atPoint description#>
+    /// - Returns: <#return value description#>
     func focusAtPoint(_ atPoint: CGPoint) -> Bool{
+        print("[camera][focusAtPoint]")
         guard let device = captureDevice else { return false }
         
         do {
             try device.lockForConfiguration()
             
+            //focasチェック
             if device.isFocusPointOfInterestSupported {
                 //Add Focus on Point
                 device.focusMode = .autoFocus
@@ -161,12 +214,26 @@ public extension CameraVersion2ViewController{
     func captureImage() {
         guard let _ = stillImageOutputImpl else { return }
         
+        //MEMO: 連写されるバグが発生。
+        //      原因が不明の為、二秒以内に呼び出された場合、写真を送り込まないように処理を実装しておく
+        if !chaptureImageChecker {
+            print("[camera][連写]")
+            return
+        }
+        chaptureImageChecker = true
+        let dispatchQueue = DispatchQueue(label: "qu")
+        dispatchQueue.asyncAfter(deadline: .now() + 2) {
+            self.chaptureImageChecker = false
+        }
+        
+        
         var sessionQueue: DispatchQueue!
         sessionQueue = DispatchQueue(label: "Capture Session", attributes: [])
         sessionQueue.async(execute: {
             do {
                 try self.captureDevice?.lockForConfiguration()
             } catch {
+                print("[camera][captureImage][lockError]")
                 // handle error
                 return
             }
@@ -181,7 +248,59 @@ public extension CameraVersion2ViewController{
         })
     }
 
+    // CameraTimer
     
+    func startCountDownTimer() {
+        if timerStarted { return }
+        
+        if !setupEstimationParameter() {
+            Alertift.alert(title: nil, message: NSLocalizedString("Input height, weight, age and gender.", comment: ""))
+                .action(.default("OK"))
+                .show(on: self, completion: nil)
+            return
+        }
+        
+        timerStarted = true
+        countLabel.isHidden = false
+        countLabel.alpha = 0
+        UIView.animate(withDuration: 0.5, animations: { [weak self] in
+            self?.countLabel.alpha = 1
+        }) { [weak self] finished in
+            if finished {
+                self?.startCaptureTimer()
+            }
+        }
+    }
+    
+    func startCaptureTimer() {
+        countDownTimeCount(count: 10)
+    }
+    
+    func countDownTimeCount(count: Int) {
+        countLabel.text = "\(count)"
+        if count == 0 {
+            countLabel.isHidden = true
+            
+            // ADD:
+            // angle condition
+            if !captureButton.isEnabled {
+                Alertift
+                    .alert(title: nil,
+                           message: NSLocalizedString("Angle condition is not met. Please fix the angle.", comment: ""))
+                    .action(.default("OK"))
+                    .show(on: self, completion: nil)
+                timerStarted = false
+                return
+            }
+            
+            startCapturing()
+        } else {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] in
+                self?.countDownTimeCount(count: count - 1)
+            }
+        }
+    }
+
 }
 
 extension CameraVersion2ViewController: AVCapturePhotoCaptureDelegate {

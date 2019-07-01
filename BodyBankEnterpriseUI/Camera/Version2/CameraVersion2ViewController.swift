@@ -68,6 +68,8 @@ open class CameraVersion2ViewController: UIViewController {
     var captureDevice: AVCaptureDevice?     // Cront or Back
     var stillImageOutputImpl: NSObject?     // Camera iOS 9 or 10over
     
+    var chaptureImageChecker = false        // ２連続写真が撮られる処理のガード
+    
     private var _observers = [NSKeyValueObservation]()
     
     var stillImageOutput: AVCapturePhotoOutput?{
@@ -127,7 +129,7 @@ open class CameraVersion2ViewController: UIViewController {
     
     
     
-    // MARK: View cycle
+    // MARK:- View Lifecycle
     open override func viewDidLoad() {
         super.viewDidLoad()
         frontImageButton.imageView?.contentMode = .scaleAspectFill
@@ -158,6 +160,7 @@ open class CameraVersion2ViewController: UIViewController {
     }
     
     open override func viewDidAppear(_ animated: Bool) {
+        print("[camera][viewDidAppear]")
         super.viewDidAppear(animated)
         SwiftSpinner.show(NSLocalizedString("Please Wait...", comment: ""))
         showingLoading = true
@@ -173,6 +176,7 @@ open class CameraVersion2ViewController: UIViewController {
     
     
     open override func viewWillDisappear(_ animated: Bool) {
+        print("[camera][viewWillDisappear]")
         super.viewWillDisappear(animated)
         if captureSession.isRunning {
             captureSession.stopRunning()
@@ -181,11 +185,8 @@ open class CameraVersion2ViewController: UIViewController {
         stopListeningGyro()
         timerStarted = false
         
-        for observer in _observers {
-            observer.invalidate()
-        }
+        removeKVO()
         
-        _observers.removeAll()
     }
     
     open override func viewDidDisappear(_ animated: Bool) {
@@ -211,6 +212,14 @@ open class CameraVersion2ViewController: UIViewController {
             })
         }
         
+    }
+    
+    
+    func removeKVO(){
+        for observer in _observers {
+            observer.invalidate()
+        }
+        _observers.removeAll()
     }
     
     
@@ -255,19 +264,20 @@ open class CameraVersion2ViewController: UIViewController {
     @IBAction func captureButtonDidTap(_ sender: UIButton) {
         
         // check CameraParmission
-        if (!PermissionUtil.isCameraEnabled()) {
+        if !PermissionUtil.isCameraEnabled() {
             PermissionUtil.checkCameraPermission(self, callback: { (dialogShown) in
             })
             return
         }
         
         // check PhotoParmission
-        if (!PermissionUtil.isPhotoLibraryEnabled()) {
+        if !PermissionUtil.isPhotoLibraryEnabled() {
             PermissionUtil.checkPhotoLibraryPermission(self, callback: { (dialogShown) in
             })
             return
         }
         
+        // check InputParameter
         if !setupEstimationParameter() {
             Alertift
                 .alert(title: nil,
@@ -278,6 +288,24 @@ open class CameraVersion2ViewController: UIViewController {
         }
         
         startCapturing()
+    }
+    
+    @IBAction func timerButtonDidtap(sender: Any) {
+        if !PermissionUtil.isCameraEnabled() {
+            PermissionUtil.checkCameraPermission(self, callback: { (dialogShown) in
+                
+            })
+            return
+        }
+        
+        if !PermissionUtil.isPhotoLibraryEnabled() {
+            PermissionUtil.checkPhotoLibraryPermission(self, callback: { (dialogShown) in
+                
+            })
+            return
+        }
+        
+        startCountDownTimer()
     }
 
     @IBAction func switchCameraButtonDidTap(_ sender: UIButton) {
@@ -310,23 +338,7 @@ open class CameraVersion2ViewController: UIViewController {
         })
     }
     
-    @IBAction func timerButtonDidtap(sender: Any) {
-        if (!PermissionUtil.isCameraEnabled()) {
-            PermissionUtil.checkCameraPermission(self, callback: { (dialogShown) in
-                
-            })
-            return
-        }
-        
-        if (!PermissionUtil.isPhotoLibraryEnabled()) {
-            PermissionUtil.checkPhotoLibraryPermission(self, callback: { (dialogShown) in
-                
-            })
-            return
-        }
-        
-        startCountDownTimer()
-    }
+
     
     @IBAction func frontImageButtonDidTap(sender: Any){
         let configuration = ImageViewerConfiguration { config in
@@ -373,51 +385,21 @@ open class CameraVersion2ViewController: UIViewController {
         }
     }
     
-    
-    
     // MARK: - Initial Methods
-    func initializeCapture() {
-        previewLayer?.removeFromSuperlayer()
-        stillImageOutputImpl = nil
-        captureSession = AVCaptureSession()
-        initializeCameraSession(captureDevice?.position != .front)
-        setupFocusObserver()
-    }
-    
-    func initializeCameraSession(_ facingBack: Bool) {
-        cameraFacingBack = facingBack
-        canFocus = facingBack
-        captureSession = AVCaptureSession()
-        // iPhoneバージョンによるサポートする解像度の違い (iPhone S4は切り捨て)
-        // https://stackoverflow.com/questions/19422322/method-to-find-devices-camera-resolution-ios
-        if facingBack {
-            captureSession.sessionPreset = .hd1920x1080
-        } else {
-            captureSession.sessionPreset = .photo
-        }
-        
-        
-        if facingBack {
-            captureDevice = AVCaptureDevice.default(.builtInWideAngleCamera,
-                                                    for: .video,
-                                                    position: .back)
-        } else {
-            captureDevice = AVCaptureDevice.default(.builtInWideAngleCamera,
-                                                    for: .video,
-                                                    position: .front)
-        }
-        
-        setupCamera()
-    }
-    
     func setupFocusObserver() {
+        
         guard let captureDevice = self.captureDevice else { return }
+        print("[camera][setupFocusObserver]")
+        
+        removeKVO()
         
         _observers.append(captureDevice.observe(\.isAdjustingFocus, options: [.old, .new]) { [weak self] _, change in
             guard let self = self else { return }
             guard let isAdjusting = change.newValue else { return }
             
+            
             if !isAdjusting && self.capturing {
+                print("[camera][setupFocusObserver][captureImage]")
                 // capture when auto-focus finished
                 self.captureImage()
             }
@@ -426,8 +408,14 @@ open class CameraVersion2ViewController: UIViewController {
     
     
     
+    
+    /// 画像を
+    ///
+    /// - Parameters:
+    ///   - image: <#image description#>
+    ///   - error: <#error description#>
     func optimizeAndSetImage2EstimationParams(_ image: UIImage?, _ error: NSError?) -> Void {
-        
+        print("[camera]:\(String(describing: image))")
         guard let image = image else { return }
         if let _ = error { return }
         
@@ -445,8 +433,10 @@ open class CameraVersion2ViewController: UIViewController {
         if let transformedImage = transformedImage {
             UIImageWriteToSavedPhotosAlbum(transformedImage, nil, nil, nil)
             var targetImage: UIImage? = transformedImage
+            // 顔にモザイクを掛ける
             if shouldBlurFace {
-                targetImage = BlurFace(image: transformedImage).blurFaces(centerOffset: capturingFront == true ? .zero : CGPoint(x: -transformedImage.size.width / 20, y: 0)) ?? transformedImage
+                let size = capturingFront == true ? .zero : CGPoint(x: -transformedImage.size.width / 20, y: 0)
+                targetImage = BlurFace(image: transformedImage).blurFaces(centerOffset: size) ?? transformedImage
             }
             if let _ = estimationParameter.frontImage {
                 estimationParameter.sideImage = targetImage
@@ -546,57 +536,6 @@ open class CameraVersion2ViewController: UIViewController {
         }
     }
     
-
-    func startCountDownTimer() {
-        if timerStarted { return }
-        
-        if !setupEstimationParameter() {
-            Alertift.alert(title: nil, message: NSLocalizedString("Input height, weight, age and gender.", comment: ""))
-                .action(.default("OK"))
-                .show(on: self, completion: nil)
-            return
-        }
-        
-        timerStarted = true
-        countLabel.isHidden = false
-        countLabel.alpha = 0
-        UIView.animate(withDuration: 0.5, animations: { [weak self] in
-            self?.countLabel.alpha = 1
-        }) { [weak self] finished in
-            if finished {
-                self?.startCaptureTimer()
-            }
-        }
-    }
-    
-    func startCaptureTimer() {
-        countDownTimeCount(count: 10)
-    }
-    
-    func countDownTimeCount(count: Int) {
-        countLabel.text = "\(count)"
-        if count == 0 {
-            countLabel.isHidden = true
-            
-            // ADD:
-            // angle condition
-            if !captureButton.isEnabled {
-                Alertift
-                    .alert(title: nil,
-                           message: NSLocalizedString("Angle condition is not met. Please fix the angle.", comment: ""))
-                    .action(.default("OK"))
-                    .show(on: self, completion: nil)
-                timerStarted = false
-                return
-            }
-            
-            startCapturing()
-        } else {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] in
-                self?.countDownTimeCount(count: count - 1)
-            }
-        }
-    }
 }
 
 
@@ -616,7 +555,8 @@ extension CameraVersion2ViewController: UIImagePickerControllerDelegate, UINavig
             if let transformedImage = UIImage(data: data){
                 var targetImage: UIImage? = transformedImage
                 if self.shouldBlurFace{
-                    targetImage = BlurFace(image: transformedImage).blurFaces(centerOffset: self.capturingFront == true ? .zero : CGPoint(x: -transformedImage.size.width / 20, y: 0)) ?? transformedImage
+                    let size = self.capturingFront == true ? .zero : CGPoint(x: -transformedImage.size.width / 20, y: 0)
+                    targetImage = BlurFace(image: transformedImage).blurFaces(centerOffset: size) ?? transformedImage
                 }
                 if let _ = self.estimationParameter.frontImage {
                     self.estimationParameter.sideImage = targetImage
