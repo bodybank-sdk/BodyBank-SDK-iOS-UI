@@ -11,6 +11,7 @@ import UIKit
 
 public extension BodyBankEnterprise{
     public class TutorialUI{
+        
         static var bundle: Bundle?{
             get{
                 let podBundle = Bundle(for: self)
@@ -22,18 +23,27 @@ public extension BodyBankEnterprise{
                 }
             }
         }
-        public static func show(on viewController: UIViewController, animated: Bool, completion: (() -> Void)?) -> TutorialViewController?{
-            if let bundle = bundle{
-                let storyboard = UIStoryboard(name: "Tutorial", bundle: bundle)
-                if let nav = storyboard.instantiateInitialViewController() as? UINavigationController{
-                    viewController.present(nav, animated: animated, completion: completion)
-                    return nav.viewControllers.first as? TutorialViewController
-                }else{
-                    return nil
-                }
-            }else{
-                return nil
-            }
+        
+        
+        /// viewController の上にNavigationControllerを読み込む
+        ///
+        /// - Parameters:
+        ///   - viewController: <#viewController description#>
+        ///   - animated: <#animated description#>
+        ///   - completion: <#completion description#>
+        /// - Returns: <#return value description#>
+        public static func show(on viewController: UIViewController,
+                                animated: Bool,
+                                completion: (() -> Void)?) -> TutorialViewController?
+        {
+            guard let bundle = bundle else { return nil }
+
+            let storyboard = UIStoryboard(name: "Tutorial", bundle: bundle)
+            guard let nav = storyboard.instantiateInitialViewController() as? UINavigationController else { return nil }
+
+            viewController.present(nav, animated: animated, completion: completion)
+            return nav.viewControllers.first as? TutorialViewController
         }
+        
     }
 }
