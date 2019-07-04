@@ -34,6 +34,7 @@ public extension CameraVersion2ViewControllerDelegate {
 
 open class CameraVersion2ViewController: UIViewController {
     
+    @IBOutlet weak var frontImageEraceButton: UIButton!
     @IBOutlet open weak var cameraLayer: UIView!
     @IBOutlet weak var guideImageView: UIImageView!
     
@@ -70,6 +71,7 @@ open class CameraVersion2ViewController: UIViewController {
     
     var chaptureImageChecker = false        // ２連続写真が撮られる処理のガード
     
+    @IBOutlet weak var versionLabel: UILabel!
     private var _observers = [NSKeyValueObservation]()
     
     var stillImageOutput: AVCapturePhotoOutput?{
@@ -100,6 +102,7 @@ open class CameraVersion2ViewController: UIViewController {
                 if let bundle = BodyBankEnterprise.CameraUI.bundle{
                     guideImageView.image = UIImage(named: "front", in: bundle, compatibleWith: nil)
                 }
+                frontImageEraceButton.isHidden = true
                 frontImageButton.isHidden = true
                 estimationParameter.frontImage = nil
                 frontImageButton.setImage(nil, for: .normal)
@@ -107,6 +110,7 @@ open class CameraVersion2ViewController: UIViewController {
                 if let bundle = BodyBankEnterprise.CameraUI.bundle{
                     guideImageView.image = UIImage(named: "side", in: bundle, compatibleWith: nil)
                 }
+                frontImageEraceButton.isHidden = false
                 frontImageButton.isHidden = false
                 estimationParameter.sideImage = nil
                 frontImageButton.setImage(estimationParameter.frontImage, for: .normal)
@@ -140,6 +144,10 @@ open class CameraVersion2ViewController: UIViewController {
         title = NSLocalizedString("Stand inside the outline", comment: "")
         
         createToolber()
+        
+        let version = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as! String
+        versionLabel.text = "v:\(version)"
+
     }
     
     open override func viewWillAppear(_ animated: Bool) {
@@ -384,7 +392,11 @@ open class CameraVersion2ViewController: UIViewController {
             estimationParameter.race = .Human
         }
     }
-    
+
+    @IBAction func closeFrontButton(_ sender: Any) {
+        self.capturingFront = true
+    }
+
     // MARK: - Initial Methods
     func setupFocusObserver() {
         

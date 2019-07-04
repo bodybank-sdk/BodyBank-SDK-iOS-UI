@@ -48,8 +48,6 @@ public extension CameraVersion2ViewController{
                                                     position: .front)
         }
         
-        captureDevice?.isVideoHDREnabled = false
-        
         setupCamera()
     }
     
@@ -58,9 +56,8 @@ public extension CameraVersion2ViewController{
     /// カメラの撮影を行う
     /// startCaputuring
     func startCapturing() {
-        
+        print("[camera][startCapturing]: \(capturing)")
         if capturing { return }
-        
         capturing = true
         
         // フロントカメラではフォーカスできないため、この時点で撮影を発火する
@@ -84,6 +81,9 @@ public extension CameraVersion2ViewController{
     }
     
     func setupCamera() {
+        
+        let _ = setHDR(mode: false)
+        
         if cameraFacingBack {
             let _ = setFocusMode(AVCaptureDevice.FocusMode.continuousAutoFocus)
             let _ = setExposureMode(.continuousAutoExposure)
@@ -177,33 +177,35 @@ public extension CameraVersion2ViewController{
         }
     }
     
+    
     func setFocusMode(_ mode: AVCaptureDevice.FocusMode) -> Bool {
         guard let device = captureDevice else { return true }
         do {
             try device.lockForConfiguration()
             
             if device.isFocusModeSupported(mode) {
-                //Add Focus on Point
                 device.focusMode = mode
             }
             device.unlockForConfiguration()
         } catch {
-            // handle error
             return false
         }
         
         return true
     }
     
+    
+    /// Setting Exposure
+    /// 露出の設定を行う
+    /// - Parameter mode:
+    /// - Returns: true:success false:false
     func setExposureMode(_ mode: AVCaptureDevice.ExposureMode) -> Bool {
         guard let device = captureDevice else { return true }
         do {
             try device.lockForConfiguration()
-            
             if device.isExposureModeSupported(mode) {
                 device.exposureMode = mode
             }
-            
             device.unlockForConfiguration()
             return true
         } catch {
@@ -211,18 +213,39 @@ public extension CameraVersion2ViewController{
         }
     }
     
+    /// Setting HDR
+    /// 露出の設定を行う
+    /// - Parameter mode:
+    /// - Returns: true:success false:false
+    func setHDR( mode: Bool) -> Bool {
+//        guard let device = captureDevice else { return true }
+//        do {
+//            try device.lockForConfiguration()
+//            device.isVideoHDREnabled = mode
+//            device.unlockForConfiguration()
+//            return true
+//        } catch {
+//            return false
+//        }
+        return true
+    }
+
+    
     func captureImage() {
         guard let _ = stillImageOutputImpl else { return }
         
         //MEMO: 連写されるバグが発生。
         //      原因が不明の為、二秒以内に呼び出された場合、写真を送り込まないように処理を実装しておく
-        if !chaptureImageChecker {
+        if chaptureImageChecker {
             print("[camera][連写]")
             return
         }
+        print("[camera][連写防止]")
         chaptureImageChecker = true
         let dispatchQueue = DispatchQueue(label: "qu")
-        dispatchQueue.asyncAfter(deadline: .now() + 2) {
+        dispatchQueue.asyncAfter(deadline: .now() + 1) {
+            print("[camera][連写防止完了]")
+            self.capturing = false
             self.chaptureImageChecker = false
         }
         
