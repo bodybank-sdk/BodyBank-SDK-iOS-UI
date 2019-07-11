@@ -214,7 +214,7 @@ public extension CameraVersion2ViewController{
     }
     
     /// Setting HDR
-    /// 露出の設定を行う
+    /// 露出の設定を行う(未実装）
     /// - Parameter mode:
     /// - Returns: true:success false:false
     func setHDR( mode: Bool) -> Bool {
@@ -359,6 +359,3 @@ extension CameraVersion2ViewController: AVCaptureVideoDataOutputSampleBufferDele
         }
     }
 }
-
-
-

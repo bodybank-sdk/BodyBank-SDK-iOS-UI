@@ -31,7 +31,7 @@ open class EstimationHistoryResultEntryCell: UITableViewCell {
         valueLabel.text = String(format: "%.1f%@", value, unit ?? "")
         templateLabel.text = String(format: "[%.1f]", template)
         
-        let abs = fabsl(template - value) 
+        let abs = fabs(template - value) 
         print("[ABS]:\(abs)")
         
         switch abs {

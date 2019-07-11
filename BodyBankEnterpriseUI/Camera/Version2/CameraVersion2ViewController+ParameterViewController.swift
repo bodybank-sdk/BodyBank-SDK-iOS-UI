@@ -48,6 +48,19 @@ public extension CameraVersion2ViewController{
             return false
         }
         
+        //extraData
+        var jsonDic = Dictionary<String, Any>()
+        jsonDic["extraId"] = Int(numberTextField.text ?? "-1")
+        
+        do {
+            let jsonData = try JSONSerialization.data(withJSONObject: jsonDic)
+            let jsonStr = String(bytes: jsonData, encoding: .utf8)!
+            estimationParameter.extra = jsonStr
+        } catch (let e) {
+            print(e)
+        }
+        
+        
         return true
     }
 }
@@ -129,7 +142,8 @@ extension CameraVersion2ViewController: UITextFieldDelegate{
     func createToolber() {
         createHeightToolber()
         createWeightToolber()
-        createAgeToolber()
+        createOkToolber(textField: ageTextField)
+        createOkToolber(textField: numberTextField)
     }
     
     func createHeightToolber() {
@@ -229,7 +243,7 @@ extension CameraVersion2ViewController: UITextFieldDelegate{
         weightLabel.text = "lbs"
     }
     
-    func createAgeToolber() {
+    func createOkToolber(textField: UITextField) {
         let toolBar = UIToolbar()
         let flexibleItem = UIBarButtonItem(barButtonSystemItem: .flexibleSpace,
                                            target: nil,
@@ -242,8 +256,8 @@ extension CameraVersion2ViewController: UITextFieldDelegate{
         toolBar.setItems([flexibleItem,okButton],animated: true)
         
         toolBar.sizeToFit()
-        ageTextField.delegate = self
-        ageTextField.inputAccessoryView = toolBar
+        textField.delegate = self
+        textField.inputAccessoryView = toolBar
     }
 }
 

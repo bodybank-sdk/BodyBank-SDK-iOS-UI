@@ -52,8 +52,9 @@ open class CameraVersion2ViewController: UIViewController {
     @IBOutlet weak var ageTextField: UITextField!           // 30
     @IBOutlet weak var genderSegmented: UISegmentedControl!
     @IBOutlet weak var warningLabel: UILabel!
+    @IBOutlet weak var numberTextField: UITextField!        //extrafield
     
-    // Gyro's View
+    // Gyro's View    
     @IBOutlet weak var angleView: UIView!
     @IBOutlet weak var tiltView: UIView!
     @IBOutlet weak var slideBarView: UIView!
@@ -95,6 +96,8 @@ open class CameraVersion2ViewController: UIViewController {
     var attitudeWhenPhotoCaptured: CMAttitude?
     var currentGravity: CMAcceleration?
     //    var previousTranslationY = 0.0
+    
+    var isDebug = false
     
     var capturingFront = true {
         didSet {
@@ -147,7 +150,7 @@ open class CameraVersion2ViewController: UIViewController {
         
         let version = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as! String
         versionLabel.text = "v:\(version)"
-
+        
     }
     
     open override func viewWillAppear(_ animated: Bool) {
@@ -180,6 +183,10 @@ open class CameraVersion2ViewController: UIViewController {
             })
         })
         startListeningGyro()
+        
+        if isDebug {
+            numberTextField.isHidden = false
+        }
     }
     
     
@@ -396,6 +403,10 @@ open class CameraVersion2ViewController: UIViewController {
     @IBAction func closeFrontButton(_ sender: Any) {
         self.capturingFront = true
     }
+    
+    @IBAction func helpButtonDidTouch(_ sender: Any) {
+    }
+    
 
     // MARK: - Initial Methods
     func setupFocusObserver() {
@@ -443,13 +454,43 @@ open class CameraVersion2ViewController: UIViewController {
         }
         
         if let transformedImage = transformedImage {
+            //写真を保存する
             UIImageWriteToSavedPhotosAlbum(transformedImage, nil, nil, nil)
             var targetImage: UIImage? = transformedImage
+            
             // 顔にモザイクを掛ける
             if shouldBlurFace {
                 let size = capturingFront == true ? .zero : CGPoint(x: -transformedImage.size.width / 20, y: 0)
                 targetImage = BlurFace(image: transformedImage).blurFaces(centerOffset: size) ?? transformedImage
             }
+            
+            //
+            if isDebug {
+                let gender:String = {
+                    switch genderSegmented.selectedSegmentIndex {
+                    case 0:
+                        return "Man"
+                    case 1:
+                        return "Woman"
+                    default:
+                        return "?"
+                    }
+                }()
+                
+                let str = """
+                No.\(numberTextField.text ?? "none")
+                H.\(heightTextField.text ?? "none" ): \(heightLabel.text ?? "none" )
+                W.\(weightTextField.text ?? "none" ): \(weightLabel.text ?? "none" )
+                A.\(ageTextField.text ?? "none")
+                G.\(gender)
+                """
+                // テキストを書き込む
+                if let image = transformedImage.drawText(text: str, drawRect: CGRect(x: 0, y: 0, width: transformedImage.size.width/5, height: image.size.height/5)) {
+                    UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
+                }
+            }
+
+            
             if let _ = estimationParameter.frontImage {
                 estimationParameter.sideImage = targetImage
                 
