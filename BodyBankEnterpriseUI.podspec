@@ -1,13 +1,13 @@
 Pod::Spec.new do |s|
     s.name = 'BodyBankEnterpriseUI'
     s.summary = 'BodyBank Enterprise iOS UI SDK'
-    s.version = '0.0.38'
+    s.version = '0.1.1'
     s.author = 'Original Inc.'
     s.license = { :type => 'MIT', :file => 'LICENSE' }
 
     s.homepage = 'https://originalstitch.com'
     s.platform = :ios, '10.0'
-    s.swift_version = '4.2'
+    s.swift_version = '5.0'
     s.source = {
         :git => "https://github.com/bodybank-sdk/BodyBank-SDK-iOS-UI.git",
         :tag => s.version.to_s
@@ -30,7 +30,7 @@ Pod::Spec.new do |s|
     s.subspec 'History' do |history|
         history.dependency 'BodyBankEnterprise'
         history.dependency 'SimpleImageViewerNew'
-        history.dependency 'NVActivityIndicatorView', '4.6.1'
+        history.dependency 'NVActivityIndicatorView', '~> 4.6.1'
         history.dependency 'Kingfisher', '~> 4.10.1', '< 5.0'
         history.dependency 'Alertift'
         history.dependency 'AFDateHelper'
