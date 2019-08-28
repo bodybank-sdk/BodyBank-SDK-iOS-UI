@@ -8,42 +8,26 @@
 
 /* Begin PBXBuildFile section */
 		2FC366CB33DA99FF6C281DF2 /* Pods_BodyBankEnterpriseUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A0240D91454823AC4856F1D /* Pods_BodyBankEnterpriseUI.framework */; };
-		5950A27FAD8F2EF0746E1888 /* Pods_BodyBankEnterpriseUIDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A4157A5218D429C756B3D29 /* Pods_BodyBankEnterpriseUIDemo.framework */; };
 		68DBD14C640B826866C9BB5E /* Pods_BodyBankEnterpriseUIDemoUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E61948E930D496589DBA3F1B /* Pods_BodyBankEnterpriseUIDemoUITests.framework */; };
-		6F5393752304D9A7000419BD /* BasePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F5393662304D9A7000419BD /* BasePickerViewController.swift */; };
 		6F5393762304D9A7000419BD /* BasePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F5393662304D9A7000419BD /* BasePickerViewController.swift */; };
-		6F5393772304D9A7000419BD /* CameraViewController+Camera.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F5393672304D9A7000419BD /* CameraViewController+Camera.swift */; };
 		6F5393782304D9A7000419BD /* CameraViewController+Camera.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F5393672304D9A7000419BD /* CameraViewController+Camera.swift */; };
-		6F5393792304D9A7000419BD /* WeightPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F5393682304D9A7000419BD /* WeightPickerViewController.swift */; };
 		6F53937A2304D9A7000419BD /* WeightPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F5393682304D9A7000419BD /* WeightPickerViewController.swift */; };
-		6F53937B2304D9A7000419BD /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F5393692304D9A7000419BD /* CameraViewController.swift */; };
 		6F53937C2304D9A7000419BD /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F5393692304D9A7000419BD /* CameraViewController.swift */; };
-		6F53937D2304D9A7000419BD /* AgePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F53936A2304D9A7000419BD /* AgePickerViewController.swift */; };
 		6F53937E2304D9A7000419BD /* AgePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F53936A2304D9A7000419BD /* AgePickerViewController.swift */; };
-		6F53937F2304D9A7000419BD /* BodyBankEnterpriseUI+Camera.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F53936B2304D9A7000419BD /* BodyBankEnterpriseUI+Camera.swift */; };
 		6F5393802304D9A7000419BD /* BodyBankEnterpriseUI+Camera.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F53936B2304D9A7000419BD /* BodyBankEnterpriseUI+Camera.swift */; };
-		6F5393812304D9A7000419BD /* CameraViewController+Parameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F53936C2304D9A7000419BD /* CameraViewController+Parameter.swift */; };
 		6F5393822304D9A7000419BD /* CameraViewController+Parameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F53936C2304D9A7000419BD /* CameraViewController+Parameter.swift */; };
-		6F5393832304D9A7000419BD /* HeightPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F53936D2304D9A7000419BD /* HeightPickerViewController.swift */; };
 		6F5393842304D9A7000419BD /* HeightPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F53936D2304D9A7000419BD /* HeightPickerViewController.swift */; };
-		6F5393852304D9A7000419BD /* CameraVersion2ViewController+Camera.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F53936F2304D9A7000419BD /* CameraVersion2ViewController+Camera.swift */; };
 		6F5393862304D9A7000419BD /* CameraVersion2ViewController+Camera.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F53936F2304D9A7000419BD /* CameraVersion2ViewController+Camera.swift */; };
-		6F5393872304D9A7000419BD /* CameraVersion2ViewController+ParameterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F5393702304D9A7000419BD /* CameraVersion2ViewController+ParameterViewController.swift */; };
 		6F5393882304D9A7000419BD /* CameraVersion2ViewController+ParameterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F5393702304D9A7000419BD /* CameraVersion2ViewController+ParameterViewController.swift */; };
-		6F5393892304D9A7000419BD /* CameraVersion2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F5393712304D9A7000419BD /* CameraVersion2ViewController.swift */; };
 		6F53938A2304D9A7000419BD /* CameraVersion2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F5393712304D9A7000419BD /* CameraVersion2ViewController.swift */; };
-		6F53938B2304D9A7000419BD /* Camera.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6F5393722304D9A7000419BD /* Camera.storyboard */; };
 		6F53938C2304D9A7000419BD /* Camera.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6F5393722304D9A7000419BD /* Camera.storyboard */; };
-		6F53938D2304D9A7000419BD /* CameraVersion2.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6F5393732304D9A7000419BD /* CameraVersion2.storyboard */; };
 		6F53938E2304D9A7000419BD /* CameraVersion2.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6F5393732304D9A7000419BD /* CameraVersion2.storyboard */; };
-		6F53938F2304D9A7000419BD /* Camera.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6F5393742304D9A7000419BD /* Camera.xcassets */; };
 		6F5393902304D9A7000419BD /* Camera.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6F5393742304D9A7000419BD /* Camera.xcassets */; };
 		6F5393922304DB7E000419BD /* EstimationHistoryShowcaseDetailTemplate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F5393912304DB7E000419BD /* EstimationHistoryShowcaseDetailTemplate.swift */; };
-		6F5393942304DCF7000419BD /* UIImage+drawText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F5393932304DCF7000419BD /* UIImage+drawText.swift */; };
-		6F5393952304DCF7000419BD /* UIImage+drawText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F5393932304DCF7000419BD /* UIImage+drawText.swift */; };
+		6FCE00D823161F6B002AF2F7 /* UIImage+drawText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FCE00D623161F01002AF2F7 /* UIImage+drawText.swift */; };
+		6FCE00E72316242B002AF2F7 /* Pods_BodyBankEnterpriseUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A0240D91454823AC4856F1D /* Pods_BodyBankEnterpriseUI.framework */; };
 		8E41ED8C21CB9ED9004F9931 /* BodyBankEnterpriseUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E41ED8321CB9ED9004F9931 /* BodyBankEnterpriseUI.framework */; };
 		8E41ED9321CB9ED9004F9931 /* BodyBankEnterpriseUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E41ED9221CB9ED9004F9931 /* BodyBankEnterpriseUITests.swift */; };
-		8E41ED9821CB9ED9004F9931 /* BodyBankEnterpriseUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E41ED8321CB9ED9004F9931 /* BodyBankEnterpriseUI.framework */; };
 		8E41ED9921CB9ED9004F9931 /* BodyBankEnterpriseUI.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8E41ED8321CB9ED9004F9931 /* BodyBankEnterpriseUI.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		8E41EE9821CBA498004F9931 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC6789921C1300600514FF9 /* AppDelegate.swift */; };
 		8E41EE9921CBA498004F9931 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC6789B21C1300600514FF9 /* ViewController.swift */; };
@@ -154,7 +138,7 @@
 		6F5393732304D9A7000419BD /* CameraVersion2.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = CameraVersion2.storyboard; sourceTree = "<group>"; };
 		6F5393742304D9A7000419BD /* Camera.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Camera.xcassets; sourceTree = "<group>"; };
 		6F5393912304DB7E000419BD /* EstimationHistoryShowcaseDetailTemplate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EstimationHistoryShowcaseDetailTemplate.swift; sourceTree = "<group>"; };
-		6F5393932304DCF7000419BD /* UIImage+drawText.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIImage+drawText.swift"; path = "../../../../BodyBank-SDK-iOS-UI/BodyBankEnterpriseUI/Misc/UIImage+drawText.swift"; sourceTree = "<group>"; };
+		6FCE00D623161F01002AF2F7 /* UIImage+drawText.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+drawText.swift"; sourceTree = "<group>"; };
 		7A0240D91454823AC4856F1D /* Pods_BodyBankEnterpriseUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BodyBankEnterpriseUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		82A96B4540DFA9819D8956BF /* Pods-BodyBankEnterpriseUIDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BodyBankEnterpriseUIDemo.release.xcconfig"; path = "Target Support Files/Pods-BodyBankEnterpriseUIDemo/Pods-BodyBankEnterpriseUIDemo.release.xcconfig"; sourceTree = "<group>"; };
 		8A9CE5BC768C3FD2EA0A5948 /* Pods-BodyBankEnterpriseUIDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BodyBankEnterpriseUIDemo.debug.xcconfig"; path = "Target Support Files/Pods-BodyBankEnterpriseUIDemo/Pods-BodyBankEnterpriseUIDemo.debug.xcconfig"; sourceTree = "<group>"; };
@@ -235,8 +219,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5950A27FAD8F2EF0746E1888 /* Pods_BodyBankEnterpriseUIDemo.framework in Frameworks */,
-				8E41ED9821CB9ED9004F9931 /* BodyBankEnterpriseUI.framework in Frameworks */,
+				6FCE00E72316242B002AF2F7 /* Pods_BodyBankEnterpriseUI.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -267,7 +250,6 @@
 				6F5393682304D9A7000419BD /* WeightPickerViewController.swift */,
 				6F5393692304D9A7000419BD /* CameraViewController.swift */,
 				6F53936A2304D9A7000419BD /* AgePickerViewController.swift */,
-				6F53936B2304D9A7000419BD /* BodyBankEnterpriseUI+Camera.swift */,
 				6F53936C2304D9A7000419BD /* CameraViewController+Parameter.swift */,
 				6F53936D2304D9A7000419BD /* HeightPickerViewController.swift */,
 			);
@@ -332,8 +314,8 @@
 				8E41EE5421CBA474004F9931 /* UITextField+BottomBorder.swift */,
 				8E41EE5521CBA474004F9931 /* UIColor+RGB.swift */,
 				8E41EE5621CBA474004F9931 /* UINavigationBar+BodyBank.swift */,
+				6FCE00D623161F01002AF2F7 /* UIImage+drawText.swift */,
 				8E41EE5721CBA474004F9931 /* NSLayoutConstraint+Change.swift */,
-				6F5393932304DCF7000419BD /* UIImage+drawText.swift */,
 				8E41EE5821CBA474004F9931 /* Color.swift */,
 			);
 			path = Misc;
@@ -353,6 +335,7 @@
 		8E41EE5E21CBA474004F9931 /* Camera */ = {
 			isa = PBXGroup;
 			children = (
+				6F53936B2304D9A7000419BD /* BodyBankEnterpriseUI+Camera.swift */,
 				6F5393722304D9A7000419BD /* Camera.storyboard */,
 				6F5393742304D9A7000419BD /* Camera.xcassets */,
 				6F5393732304D9A7000419BD /* CameraVersion2.storyboard */,
@@ -642,11 +625,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6F53938D2304D9A7000419BD /* CameraVersion2.storyboard in Resources */,
 				8E41EE9A21CBA4A2004F9931 /* Main.storyboard in Resources */,
-				6F53938B2304D9A7000419BD /* Camera.storyboard in Resources */,
 				8E41EE9B21CBA4A2004F9931 /* Assets.xcassets in Resources */,
-				6F53938F2304D9A7000419BD /* Camera.xcassets in Resources */,
 				8E41EE9C21CBA4A2004F9931 /* LaunchScreen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -780,7 +760,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6F5393952304DCF7000419BD /* UIImage+drawText.swift in Sources */,
+				6FCE00D823161F6B002AF2F7 /* UIImage+drawText.swift in Sources */,
 				8E41EEAA21CBA4BB004F9931 /* TutorialViewController.swift in Sources */,
 				8E41EEAB21CBA4BB004F9931 /* BodyBankEnterpriseUI+Tutorial.swift in Sources */,
 				6F5393842304D9A7000419BD /* HeightPickerViewController.swift in Sources */,
@@ -831,21 +811,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6F5393872304D9A7000419BD /* CameraVersion2ViewController+ParameterViewController.swift in Sources */,
 				6F5393922304DB7E000419BD /* EstimationHistoryShowcaseDetailTemplate.swift in Sources */,
-				6F5393892304D9A7000419BD /* CameraVersion2ViewController.swift in Sources */,
-				6F5393772304D9A7000419BD /* CameraViewController+Camera.swift in Sources */,
-				6F5393812304D9A7000419BD /* CameraViewController+Parameter.swift in Sources */,
-				6F53937D2304D9A7000419BD /* AgePickerViewController.swift in Sources */,
-				6F5393752304D9A7000419BD /* BasePickerViewController.swift in Sources */,
-				6F53937F2304D9A7000419BD /* BodyBankEnterpriseUI+Camera.swift in Sources */,
 				8E41EE9821CBA498004F9931 /* AppDelegate.swift in Sources */,
-				6F5393942304DCF7000419BD /* UIImage+drawText.swift in Sources */,
-				6F5393792304D9A7000419BD /* WeightPickerViewController.swift in Sources */,
-				6F5393852304D9A7000419BD /* CameraVersion2ViewController+Camera.swift in Sources */,
 				8E41EE9921CBA498004F9931 /* ViewController.swift in Sources */,
-				6F5393832304D9A7000419BD /* HeightPickerViewController.swift in Sources */,
-				6F53937B2304D9A7000419BD /* CameraViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
