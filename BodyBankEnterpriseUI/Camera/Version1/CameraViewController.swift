@@ -766,7 +766,7 @@ extension CameraViewController: UIImagePickerControllerDelegate, UINavigationCon
         })
     }
     
-    private func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+    public func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         picker.dismiss(animated: true, completion: nil)
     }
     
