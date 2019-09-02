@@ -10,7 +10,7 @@ import BodyBankEnterprise
 import UIKit
 
 public extension BodyBankEnterprise{
-    public class CameraUI{
+    class CameraUI{
         static var bundle: Bundle?{
             get{
                 let podBundle = Bundle(for: self)

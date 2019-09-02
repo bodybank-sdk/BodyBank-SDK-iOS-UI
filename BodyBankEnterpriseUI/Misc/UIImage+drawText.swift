@@ -5,7 +5,7 @@
 //  Created by Masashi Horita on 2019/07/09.
 //
 
-import Foundation
+import UIKit
 
 extension UIImage {
     

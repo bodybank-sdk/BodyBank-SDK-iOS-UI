@@ -45,7 +45,6 @@ open class EstimationHistoryViewController: UITableViewController {
         }
     }
     
-    var estimationTemplate = EstimationTemplate.init(type: .BG_Mannequin_Man)
     open var isDoneButtonShown = false{
         didSet{
             updateDoneButtonAppearance()
@@ -104,32 +103,32 @@ open class EstimationHistoryViewController: UITableViewController {
         guard let request = request else { return }
         entries.removeAll()
         entries.append(contentsOf: [
-            ResultEntry(name: "Height", template: estimationTemplate.height, value: request.height ?? 0, unit: lengthUnit),
-            ResultEntry(name: "Weight", template: estimationTemplate.weight, value: request.weight ?? 0, unit: massUnit),
+            ResultEntry(name: "Height", template: 0, value: request.height ?? 0, unit: lengthUnit),
+            ResultEntry(name: "Weight", template: 0, value: request.weight ?? 0, unit: massUnit),
             ResultEntry(name: "Age"    , template: 0, value: request.age ?? 0, unit: nil),
             ResultEntry(name: "Gender", template: 0, value: request.gender! , unit: nil)
             ])
         
         if let result = request.result{
             entries.append(contentsOf: [
-                ResultEntry(name: "Neck", template: estimationTemplate.neckCircumference, value: result.neckCircumference ?? 0, unit: lengthUnit),
-                ResultEntry(name: "Shoulder", template: estimationTemplate.shoulderWidth, value: result.shoulderWidth ?? 0, unit: lengthUnit),
-                ResultEntry(name: "Sleeve", template: estimationTemplate.sleeveLength, value: result.sleeveLength ?? 0, unit: lengthUnit),
-                ResultEntry(name: "Bicep", template: estimationTemplate.bicepCircumference, value: result.bicepCircumference ?? 0, unit: lengthUnit),
-                ResultEntry(name: "Wrist", template: estimationTemplate.wristCircumference, value: result.wristCircumference ?? 0, unit: lengthUnit),
-                ResultEntry(name: "Chest", template: estimationTemplate.chestCircumference, value: result.chestCircumference ?? 0, unit: lengthUnit),
-                ResultEntry(name: "Under Bust", template: estimationTemplate.underBust, value: result.underBust ?? 0, unit: lengthUnit),
-                ResultEntry(name: "Waist", template: estimationTemplate.waistCircumference, value: result.waistCircumference ?? 0, unit: lengthUnit),
-                ResultEntry(name: "High Hip", template: estimationTemplate.highHipCircumference, value: result.highHipCircumference ?? 0, unit: lengthUnit),
-                ResultEntry(name: "Hip", template: estimationTemplate.hipCircumference, value: result.hipCircumference ?? 0, unit: lengthUnit),
-                ResultEntry(name: "Thigh", template: estimationTemplate.thighCircumference, value: result.thighCircumference ?? 0, unit: lengthUnit),
-                ResultEntry(name: "Mid Thigh", template: estimationTemplate.midThichCircumference, value: result.midThichCircumference ?? 0, unit: lengthUnit),
-                ResultEntry(name: "Knee", template: estimationTemplate.kneeCircumference, value: result.kneeCircumference ?? 0, unit: lengthUnit),
-                ResultEntry(name: "Calf", template: estimationTemplate.calfCircumference, value: result.calfCircumference ?? 0, unit: lengthUnit),
-                ResultEntry(name: "Inseam", template: estimationTemplate.inseamLength, value: result.inseamLength ?? 0, unit: lengthUnit),
-                ResultEntry(name: "Out seam", template: estimationTemplate.outseamLength, value: result.outseamLength ?? 0, unit: lengthUnit),
-                ResultEntry(name: "Total Length", template: estimationTemplate.totalLength, value: result.totalLength ?? 0, unit: lengthUnit),
-                ResultEntry(name: "Back Length", template: estimationTemplate.backLength, value: result.backLength ?? 0, unit: lengthUnit),
+                ResultEntry(name: "Neck", template: 0, value: result.neckCircumference ?? 0, unit: lengthUnit),
+                ResultEntry(name: "Shoulder", template: 0, value: result.shoulderWidth ?? 0, unit: lengthUnit),
+                ResultEntry(name: "Sleeve", template: 0, value: result.sleeveLength ?? 0, unit: lengthUnit),
+                ResultEntry(name: "Bicep", template: 0, value: result.bicepCircumference ?? 0, unit: lengthUnit),
+                ResultEntry(name: "Wrist", template: 0, value: result.wristCircumference ?? 0, unit: lengthUnit),
+                ResultEntry(name: "Chest", template: 0, value: result.chestCircumference ?? 0, unit: lengthUnit),
+                ResultEntry(name: "Under Bust", template: 0, value: result.underBust ?? 0, unit: lengthUnit),
+                ResultEntry(name: "Waist", template: 0, value: result.waistCircumference ?? 0, unit: lengthUnit),
+                ResultEntry(name: "High Hip", template: 0, value: result.highHipCircumference ?? 0, unit: lengthUnit),
+                ResultEntry(name: "Hip", template: 0, value: result.hipCircumference ?? 0, unit: lengthUnit),
+                ResultEntry(name: "Thigh", template: 0, value: result.thighCircumference ?? 0, unit: lengthUnit),
+                ResultEntry(name: "Mid Thigh", template: 0, value: result.midThichCircumference ?? 0, unit: lengthUnit),
+                ResultEntry(name: "Knee", template: 0, value: result.kneeCircumference ?? 0, unit: lengthUnit),
+                ResultEntry(name: "Calf", template: 0, value: result.calfCircumference ?? 0, unit: lengthUnit),
+                ResultEntry(name: "Inseam", template: 0, value: result.inseamLength ?? 0, unit: lengthUnit),
+                ResultEntry(name: "Out seam", template: 0, value: result.outseamLength ?? 0, unit: lengthUnit),
+                ResultEntry(name: "Total Length", template: 0, value: result.totalLength ?? 0, unit: lengthUnit),
+                ResultEntry(name: "Back Length", template: 0, value: result.backLength ?? 0, unit: lengthUnit),
                 ])
             
             let debugPassword = UserDefaults.standard.value(forKey: "debug_password") as? String

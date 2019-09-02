@@ -19,8 +19,10 @@ class ViewController: UIViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        showHistoryList()
-        
+        // 確認したい画面を呼ぶ
+        showCamera2()
+//        showCamera()
+//        showTutorial()
     }
     
     func showTutorial(){
@@ -28,11 +30,16 @@ class ViewController: UIViewController {
         tutorial?.delegate = self
     }
     
-    func showCamera(){
-       let camera = BodyBankEnterprise.CameraUI.show(on: self, animated: true, completion: nil)
+//    func showCamera(){
+//       let camera = BodyBankEnterprise.CameraUI.show(on: self, animated: true, completion: nil)
+//        camera?.delegate = self
+//    }
+
+    func showCamera2(){
+        let camera = BodyBankEnterprise.CameraUI.showVersion2(on: self, animated: true, completion: nil)
         camera?.delegate = self
     }
-    
+
     func showHistoryList(){
         let historyList = BodyBankEnterprise.HistoryUI.showList(on: self, animated: true, completion: nil)
         historyList?.delegate = self
@@ -62,8 +69,21 @@ extension ViewController: CameraViewControllerDelegate{
     func cameraViewControllerDidCancel(viewController: CameraViewController) {
        dismiss(animated: true, completion: nil)
     }
-    
+
     func cameraViewControllerDidFinish(viewController: CameraViewController) {
+        dismiss(animated: true) {
+            let param = viewController.estimationParameter
+            //Use params
+        }
+    }
+}
+
+extension ViewController: CameraVersion2ViewControllerDelegate{
+    func cameraViewControllerDidCancel(viewController: CameraVersion2ViewController) {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    func cameraViewControllerDidFinish(viewController: CameraVersion2ViewController) {
         dismiss(animated: true) {
             let param = viewController.estimationParameter
             //Use params

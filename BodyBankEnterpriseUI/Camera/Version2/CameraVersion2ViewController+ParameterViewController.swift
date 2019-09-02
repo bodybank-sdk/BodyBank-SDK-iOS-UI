@@ -4,6 +4,8 @@
 //  Created by Masashi Horita on 2019/06/17.
 //
 
+import UIKit
+
 public extension CameraVersion2ViewController{
     
     /// set Estimation Parameter
